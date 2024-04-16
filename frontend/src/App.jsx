@@ -1,14 +1,22 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
-import Plan from './pages/Admin/Plan'
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Register from './pages/Admin/register/Register';
+import Home from './pages/Admin/home/Dashboard';
+import Login from './pages/Admin/login/Login';
+import Welcome from './pages/User/welcome/Welcome';
 
-
-function App() {
-
+const App = () => {
   return (
-    <div>
-        <Plan />
-    </div>
-  )
-}
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Welcome />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Home />} />
 
-export default App
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
+export default App;

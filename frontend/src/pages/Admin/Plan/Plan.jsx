@@ -2,24 +2,18 @@ import React, { useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios  from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
-import { getPlan } from '../../slice/planSlice'
+import { fetchData } from '../../../slice/planSlice'
 
 
 function Plan() {
     const dispatch = useDispatch()
     const plans = useSelector(state =>state.plans.plans)
-    console.log( useSelector(state =>state.plans.plans))
+    const error = useSelector(state => state.plans.error )
+
     
     useEffect(()=>{
-        const fetchData = async () =>{
-            try {
-                const res = await axios.get('http://localhost:3000/api/plan')
-                dispatch(getPlan(res.data));
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        fetchData();
+        dispatch(fetchData())
+
     },[])
     return (
         <div className='vh-100 bg-primary'>
@@ -36,7 +30,7 @@ function Plan() {
                 </thead>
                 <tbody>
                     {plans.map(plan =>{
-                        return <tr>
+                        return <tr key={plan._id}>
                             <td>{plan.name}</td>
                             <td>{plan.price}</td>
                             <td>{plan.description}</td>
