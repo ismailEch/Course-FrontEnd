@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { registerUser } from '../../../slice/Admin/register';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import  Navbarr  from '../../../components/Navbarr'
 
 const User = () => {
   const [email, setEmail] = useState('');
@@ -36,8 +37,11 @@ const User = () => {
 };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="max-w-md mx-auto">
+   <div className='bg-indigo-900'>
+    <Navbarr />
+   <div className="flex justify-center items-center h-screen bg-indigo-900">
+    <div className="flex justify-center items-center h-4/6 w-3/6 bg-indigo-100">
+      <div className="max-w-md mx-auto ">
         {error && (
           <div className="bg-red-200 px-6 py-4 mx-2 my-4 rounded-md text-lg flex items-center mx-auto max-w-lg">
             <svg viewBox="0 0 24 24" className="text-red-600 w-5 h-5 sm:w-5 sm:h-5 mr-3">
@@ -92,6 +96,8 @@ const User = () => {
         </form>
       </div>
     </div>
+   </div>
+   </div>
   );
 };
 
