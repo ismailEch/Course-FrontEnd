@@ -41,6 +41,7 @@ const User = () => {
     <Navbarr />
    <div className="flex justify-center items-center h-screen bg-indigo-900">
     <div className="flex justify-center items-center h-4/6 w-3/6 bg-indigo-100">
+      
       <div className="max-w-md mx-auto ">
         {error && (
           <div className="bg-red-200 px-6 py-4 mx-2 my-4 rounded-md text-lg flex items-center mx-auto max-w-lg">
