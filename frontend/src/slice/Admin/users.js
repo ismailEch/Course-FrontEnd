@@ -4,11 +4,12 @@ import axios from 'axios';
 
 
 
-export const fetchData = createAsyncThunk ('plans/getplan' ,async() =>{
+export const fetchData = createAsyncThunk ('users/getallusers' ,async() =>{
     try {
-        const res = await axios.get('http://localhost:3000/api/plan')
-        console.log('data: ' , res.data.Plan);
-        return res.data;
+        const res = await axios.get('http://localhost:3000/api/user')
+        console.log(res.data.Users);
+
+        return res.data.Users;
     } catch (error) {
         console.log('error:' , error);
     }
@@ -18,10 +19,10 @@ export const fetchData = createAsyncThunk ('plans/getplan' ,async() =>{
 
 
 
-const planSlice = createSlice({
-    name: 'plans',
+const userInfoSlice = createSlice({
+    name: 'usersInfo',
     initialState: {
-        plans: [],
+        users: [],
         loading: false,
         error: null
     },
@@ -36,11 +37,11 @@ extraReducers : builder =>{
         .addCase(fetchData.pending , (state) =>{
             state.loading = true
         } ) 
-        // .addCase(fetchData.rejected , (state,action)=>{
-        // state.loading = false 
-        // state.error = action.payload.message})
+        .addCase(fetchData.rejected , (state,action)=>{
+        state.loading = false 
+        state.error = action.payload.message})
 }
 });
 
-export const { getPlan } = planSlice.actions;
-export default planSlice.reducer;
+export const {  } = userInfoSlice.actions;
+export default userInfoSlice.reducer;
