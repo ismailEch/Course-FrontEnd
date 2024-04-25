@@ -1,89 +1,91 @@
-import React from 'react'
+import React, { useState } from 'react';
 import {Link } from 'react-router-dom';
-
+import logo from '../../assets/logo.svg'
 
 function Sidebar() {
+    const [showSidebar, setShowSidebar] = useState(false);
+
     return (
-        <div className="h-screen flex items-center justify-start">
-        
-        <div className="flex flex-col items-center w-40 h-full overflow-hidden text-indigo-300 bg-indigo-900 rounded">
-            <a className="flex items-center w-full px-3 mt-3" href="#">
-        <svg className="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-          <path d="M10 12a2 2 0 100-4 2 2 0 000 4zM3 16a3 3 0 016-1h2a3 3 0 016 1v1a2 2 0 01-2 2H5a2 2 0 01-2-2v-1z" />
-        </svg>
-                <span className="ml-2 text-sm font-bold">ACDEMIA</span>
-            </a>
-            <div className="w-full px-2">
-                <div className="flex flex-col items-center w-full mt-3 border-t border-gray-700">
-            <Link to="/admin/dashboard" className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-indigo-700">
-                      <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                      </svg>
-                      <span className="ml-2 text-sm font-medium">Dashboard</span>
-            </Link>
-            
-    
-            <Link to="/admin/users" className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-indigo-700">
-                    <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                    <span className="ml-2 text-sm font-medium">Users</span>
-            </Link>
-    
-            <Link to="/admin/teachers" className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-indigo-700">
-                    <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                    <span className="ml-2 text-sm font-medium">Teachers</span>
-            </Link>
-    
-            <Link to="/admin/categories" className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-indigo-700">
-                    <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                    <span className="ml-2 text-sm font-medium">Categories</span>
-            </Link>
-    
-            <Link to="/admin/plans" className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-indigo-700">
-                    <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                    <span className="ml-2 text-sm font-medium">Plnas</span>
-            </Link> 
-    
+        <div className={`fixed top-0 left-0 z-10 bg-gray-100 w-64 h-screen overflow-y-auto transition-transform duration-300 ease-in-out transform ${showSidebar ? 'translate-x-0' : '-translate-x-full'} md:relative md:translate-x-0 md:sticky md:flex md:flex-col md:w-64 md:bg-transparent md:overflow-y-visible md:shadow-md`}>
+                <div className="bg-blue-500 p-2 rounded-full mb-8">
+                    <img src={logo} alt="Logo" className="h-12 mx-auto" />
                 </div>
-                {/* <div className="flex flex-col items-center w-full mt-2 border-t border-gray-700">
-                    <a className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-indigo-700" href="#">
-                        <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                        <span className="ml-2 text-sm font-medium">Products</span>
-                    </a>
-                    <a className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-indigo-700" href="#">
-                        <svg className="w-6 h-6 stroke-current"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                        </svg>
-                        <span className="ml-2 text-sm font-medium">Settings</span>
-                    </a>
-                    <a className="relative flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-indigo-700" href="#">
-                        <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-                        </svg>
-                        <span className="ml-2 text-sm font-medium">Messages</span>
-                        <span className="absolute top-0 left-0 w-2 h-2 mt-2 ml-2 bg-indigo-500 rounded-full"></span>
-                    </a>
-                </div> */}
+
+                <nav className="flex-1">
+                    <ul className="flex flex-col gap-2 justify-end">
+                        <li className="flex items-center justify-center p-2 hover:bg-gray-200">
+                            <Link to="/admin/dashboard" className="w-full h-full flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                </svg>
+                                {/* Render text only on laptop screens */}
+                                <span className="hidden md:inline ml-2">Dashboard</span>
+                            </Link>
+                        </li>
+
+                        <li className="flex items-center justify-center p-2 hover:bg-gray-200">
+                            <Link to="/admin/users" className="w-full h-full flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.65 15.35a6 6 0 018.7 0M20 8V6a4 4 0 00-8 0v2" />
+                                </svg>
+                                <span className="hidden md:inline ml-2">Users</span>
+                            </Link>   
+                        </li>
+
+                        <li className="flex items-center justify-center p-2 hover:bg-gray-200">
+                            <Link to="/admin/teachers" className="w-full h-full flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0v7m0 0a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                                <span className="hidden md:inline ml-2">Teachers</span>
+                            </Link>   
+                        </li>
+
+                        <li className="flex items-center justify-center p-2 hover:bg-gray-200">
+                            <Link to="/admin/categories" className="w-full h-full flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 4v3m0 0v3m0-3h3m-3 0h3M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                </svg>
+                                <span className="hidden md:inline ml-2">Categories</span>
+                            </Link>   
+                        </li>
+
+                        <li className="flex items-center justify-center p-2 hover:bg-gray-200">
+                            <Link to="/admin/plans" className="w-full h-full flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+                                </svg>
+                                <span className="hidden md:inline ml-2">Plnas</span>
+                            </Link>   
+                        </li>
+
+                        <li className="flex items-center justify-center p-2 hover:bg-gray-200">
+                            <Link to="/admin/users" className="w-full h-full flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 17l5-5m0 0l-5-5m5 5H8m10 4V3a2 2 0 00-2-2H4a2 2 0 00-2 2v18a2 2 0 002 2h12a2 2 0 002-2z" />
+                                </svg>
+                                <span className="hidden md:inline ml-2">Log out</span>
+                            </Link>   
+                        </li>
+
+                        {/* Add more list items with only SVG icons */}
+                    </ul>
+                </nav>
+
+                {/* Close button for mobile */}
+                <button className="absolute top-0 right-0 mr-4 mt-4 md:hidden" onClick={() => setShowSidebar(false)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
             </div>
-            <a className="flex items-center justify-center w-full h-16 mt-auto bg-indigo-800 hover:bg-indigo-700" href="#">
-                <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span className="ml-2 text-sm font-medium">Log Out</span>
-            </a>
-        </div>
-    
-        </div>
       )
 }
 
 export default Sidebar
+
+
+{/* <Link to="/admin/dashboard"></Link>  */}

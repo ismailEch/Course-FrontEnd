@@ -6,6 +6,7 @@ const initialState = {
     error:null,
     user: {},
     token: null,
+    message : '',
     email : '',
     password: ''
 }
@@ -36,6 +37,7 @@ export const userLoginSlice = createSlice({
         .addCase(loginUser.fulfilled,(state, action)=>{
             state.loading= false,
             state.user = action.payload
+            state.message = action.payload.message
         })
         .addCase(loginUser.rejected, (state, action) => { 
             state.loading = false;
