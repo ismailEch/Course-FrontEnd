@@ -4,14 +4,20 @@ import planReducer from './slice/Admin/Plan/planSlice'
 import userReducer from './slice/Admin/register'
 import userLogin from './slice/Admin/login'
 //this is for get users infos
-import userInfoReducer from './slice/Admin/users'
+import userSliceReducer from './slice/Admin/User/userSlice';
+
+import categoriesReducer from './slice/Admin/Category/categorySlice';
+
+import teacherReducer from './slice/Admin/Teacher/teacherSlice';
 
 const store = configureStore({
     reducer:{
         plans:planReducer,
-        user : userReducer,
-        userlogin : userLogin ,
-        usersInfo : userInfoReducer
+        registration: userReducer,
+        userlogin : userLogin,
+        users: userSliceReducer,
+        categories: categoriesReducer,
+        teachers: teacherReducer, 
     }
 })
 
