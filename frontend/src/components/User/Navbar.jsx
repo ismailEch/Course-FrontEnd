@@ -1,8 +1,16 @@
 // import React from 'react';
 import logo from '../../assets/logo.svg';
 import { SlBasket } from "react-icons/sl";
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+    const navigate = useNavigate();
+    
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('role');
+        navigate('/login');
+    };
 
 return (
     <nav className="flex items-center justify-between px-4 py-2 bg-primary">

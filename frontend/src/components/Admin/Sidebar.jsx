@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
 import {Link } from 'react-router-dom';
 import logo from '../../assets/logo.svg'
+import { useNavigate } from 'react-router-dom';
+
 
 function Sidebar() {
+
+    const navigate = useNavigate();  
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('role');
+        navigate('/user/login');
+    };
     const [showSidebar, setShowSidebar] = useState(false);
 
     return (
@@ -63,15 +73,14 @@ function Sidebar() {
                         </li>
 
                         <li className="flex items-center justify-center p-2 hover:bg-gray-200">
-                            <Link to="/admin/users" className="w-full h-full flex items-center justify-center">
+                            <li  className="w-full h-full flex items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 17l5-5m0 0l-5-5m5 5H8m10 4V3a2 2 0 00-2-2H4a2 2 0 00-2 2v18a2 2 0 002 2h12a2 2 0 002-2z" />
                                 </svg>
-                                <span className="hidden md:inline ml-2">Log out</span>
-                            </Link>   
+                                <button  className="hidden md:inline ml-2" onClick={handleLogout}>Logout</button>
+                            </li>   
                         </li>
 
-                        {/* Add more list items with only SVG icons */}
                     </ul>
                 </nav>
 

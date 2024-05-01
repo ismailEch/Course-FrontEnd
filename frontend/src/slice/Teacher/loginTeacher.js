@@ -11,43 +11,42 @@ const initialState = {
     password: ''
 }
 
-export const loginUser = createAsyncThunk('user/loginUser', async (formdata , {rejectWithValue})=>{
+export const loginTeacher = createAsyncThunk('user/loginTeacher', async (formdata , {rejectWithValue})=>{
     try {
-        const response = await axios.post('http://localhost:3000/api/authUser/login', formdata)
+        const response = await axios.post('http://localhost:3000/api/authTeacher/login', formdata)
         localStorage.setItem('token', response.data.token);
+        localStorage.setItem('id_teacher', response.data.teacher_id);
         saveToken(response.data.token);
-        // saveUserRole(response.data.user.role);
-        return { data :response.data, token: response.data.token, role: response.data.user.role };
+        return { data :response.data, token: response.data.token};
     } catch (error) {
         return rejectWithValue(error.response.data);
 
     }
 })
 
-export const userLoginSlice = createSlice({
-        name: 'userlogin',
+export const teacherLoginSlice = createSlice({
+        name: 'teacherlogin',
         initialState: {
-            token: null,
-            role: null,
         },
         reducers: {
         
     },
     extraReducers: builder => {
-        builder.addCase(loginUser.pending , (state)=>{
+        builder.addCase(loginTeacher.pending , (state)=>{
             state.loading= true
         })
-        .addCase(loginUser.fulfilled,(state, action)=>{
+        .addCase(loginTeacher.fulfilled,(state, action)=>{
             state.loading= false,
             state.user = action.payload
             state.message = action.payload.message
         })
-        .addCase(loginUser.rejected, (state, action) => { 
+        .addCase(loginTeacher.rejected, (state, action) => { 
             state.loading = false;
-            state.error = action.payload.message;
+            state.error = action.payload ? action.payload.message : 'An error occurred'; // Check if payload exists before accessing message
         });
+        
     }
 })
 
 
-export default userLoginSlice.reducer
+export default teacherLoginSlice.reducer
