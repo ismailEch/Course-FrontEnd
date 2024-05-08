@@ -1,19 +1,50 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchCourses } from '../../../slice/Teacher/Course/courseSlice';
 
-const Test = () => {
+function Test() {
+    const dispatch = useDispatch();
+    const teacherID = localStorage.getItem('id_teacher');
+    const courses = useSelector((state) => state.courseTeacher.courses);
+    const status = useSelector((state) => state.courseTeacher.status);
+    const error = useSelector((state) => state.courseTeacher.error);
 
-  return (
-    <div className="min-h-screen flex justify-center items-center bg-green-200">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-6 space-y-6">
-        <p className="text-3xl text-green-800 font-semibold">Payment Successful!</p>
-        <p className="text-lg text-gray-600">Thank you for your payment.</p>
-        <Link to={'/teacher/dashboard'} className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 mt-4 rounded-lg transition duration-300 w-full">
-          Go to Dashboard
-        </Link>
-      </div>
-    </div>
-  );
-};
+    useEffect(() => {
+        if (teacherID) {
+            dispatch(fetchCourses(teacherID));
+        }
+    }, courses);
+
+    return (
+        <div>
+           
+                <div>
+                    <h1>Courses</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Level</th>
+                                <th>Valid</th>
+                                <th>Price</th>
+                                <th>Language</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {courses.map((course) => (
+                                <tr key={course._id}>
+                                    <td>{course.title}</td>
+                                    <td>{course.level}</td>
+                                    <td>{course.valid}</td>
+                                    <td>{course.price}</td>
+                                    <td>{course.language}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+    );
+}
 
 export default Test;

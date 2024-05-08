@@ -55,10 +55,9 @@ const Login = () => {
     };
 
     return (
-        <div className='' style={{ backgroundColor: '#2C1F4A' }}>
-            <Navbar />
-            <div className="py-16 mt-[-42px]">
-                <div className="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
+        <div className=''>
+            <div className="py-16 mb-[-42px]">
+                <div className="flex bg-white rounded-lg shadow-2xl overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
                     <div className="hidden lg:block lg:w-1/2 bg-cover" style={{backgroundImage: `url(${loginPic})`}}></div>
                     <div className="w-full p-8 lg:w-1/2">
                         <p className="text-xl text-gray-600 text-center">Welcome back!</p>

@@ -14,6 +14,10 @@ import teacherReducer from './slice/Admin/Teacher/teacherSlice';
 import registerTeacherReducer from './slice/Teacher/registerTeacher';
 import loginTeacherReducer from './slice/Teacher/loginTeacher';
 
+//course reducer
+// import courseReducer from './slice/Teacher/Course/courseSlice'
+import courseTeacherReducer from './slice/Teacher/Course/courseSlice';
+
 
 const store = configureStore({
     reducer:{
@@ -27,6 +31,8 @@ const store = configureStore({
         registerTeacher : registerTeacherReducer,
         loginTeacher : loginTeacherReducer,
 
+        // course : courseReducer
+        courseTeacher: courseTeacherReducer,
     }
 })
 
