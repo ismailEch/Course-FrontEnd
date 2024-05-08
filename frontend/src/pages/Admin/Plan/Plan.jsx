@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import { fetchData, removePlan, createNewPlan, updateExistingPlan } from '../../../slice/Admin/Plan/planSlice';
 import Sidebar from '../../../components/Admin/Sidebar';
 import AdminNavbar from '../../../components/Admin/AdminNavbar';
@@ -9,6 +10,7 @@ import { FaEdit } from "react-icons/fa";
 
 function Plan() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const plans = useSelector(state => state.plans.plans);
     const error = useSelector(state => state.plans.error);
 
@@ -16,6 +18,10 @@ function Plan() {
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (!token) {   
+            navigate("/user/login");
+        }
         dispatch(fetchData());
     }, [plans]);
     

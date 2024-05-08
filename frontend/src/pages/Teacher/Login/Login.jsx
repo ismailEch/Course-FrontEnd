@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../../../slice/Admin/login';
+import { loginTeacher } from '../../../slice/Teacher/loginTeacher';
 import Navbar from '../../../components/User/Navbar';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,46 +21,57 @@ const Login = () => {
             toast.info('Please enter your email');
             return;
         }
-
+    
         if (!password.trim()) {
             toast.info('Please enter your password');
             return;
-    }
-
+        }
+    
         // Check if email is a valid email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             toast.warning('Please enter a valid email address');
             return;
         }
-
+    
         const data = { email, password };
-
+    
         try {
-            const response = await dispatch(loginUser(data));
+            const response = await dispatch(loginTeacher(data));
             console.log(response);
-            if (response.payload.message === 'Incorrect email or password') {
+            if (response.payload && response.payload.message === 'Incorrect email or password') {
                 toast.error(response.payload.message);
-            }
-            else if(response.payload.data.status === 'Seccuss') {
-                if (response.payload.role === 'admin') {
-                    navigate('/admin/dashboard');
-                } else if(response.payload.role === 'user') {
-                    alert('Welcome User');
+            } else if (response.payload && response.payload.data.message === 'Seccuss') {
+                console.log('Login successful');
+                console.log(response.payload.data.teacher_id);
+
+                // Fetch all subscriptions
+                const subscriptionsResponse = await fetch('http://localhost:3000/api/teacherPayment/all-subscriptions');
+                const subscriptionsData = await subscriptionsResponse.json();
+                console.log(subscriptionsData);
+
+                //  Check if teacher_id exists in any subscriptions
+                const isSubscribed = subscriptionsData.subscriptions.some(subscription => subscription.teacher === response.payload.data.teacher_id);
+                if (isSubscribed) {
+                    console.log('You are subscribed');
+                } else {
+                    navigate('/teacher/planSelection')
                 }
             }
+            
         } catch (error) {
             console.error('Error:', error);
         }
     };
 
     return (
-        <div className=''>
-            <div className="py-16 mb-[-42px]">
-                <div className="flex bg-white rounded-lg shadow-2xl overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
+        <div className='' style={{ backgroundColor: '#2C1F4A' }}>
+            <Navbar />
+            <div className="py-16 mt-[-42px]">
+                <div className="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
                     <div className="hidden lg:block lg:w-1/2 bg-cover" style={{backgroundImage: `url(${loginPic})`}}></div>
                     <div className="w-full p-8 lg:w-1/2">
-                        <p className="text-xl text-gray-600 text-center">Welcome back!</p>
+                        <p className="text-xl text-gray-600 text-center">Welcome back Teacher!</p>
                         <a href="#" className="flex items-center justify-center mt-4 text-white rounded-lg shadow-md hover:bg-gray-100">
                             <div className="px-4 py-3">
                             <svg className="h-6 w-6" viewBox="0 0 40 40">

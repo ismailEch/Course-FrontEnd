@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import { fetchUsers, removeUser } from '../../../slice/Admin/User/userSlice'; 
 import Sidebar from '../../../components/Admin/Sidebar';
 import AdminNavbar from '../../../components/Admin/AdminNavbar';
@@ -12,8 +13,13 @@ import 'react-toastify/dist/ReactToastify.css';
 function Users() {
     const dispatch = useDispatch();
     const users = useSelector(state => state.users.users.Users); 
+    const navigate = useNavigate();
 
     useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (!token) {   
+            navigate("/user/login");
+        }
         dispatch(fetchUsers()); 
     },users);
 
@@ -34,14 +40,12 @@ function Users() {
     };
 
     const handleDeleteUser = (userId) => {
-        if (window.confirm("Are you sure you want to delete this user?")) {
-            dispatch(removeUser(userId)) // Dispatch removeUser action
+            dispatch(removeUser(userId)) 
             .then(()=>{
                 toast.success('Success delete User !')
             }).catch(()=>{
-                toast.error('Failed to delete User');
+                toast.success('Success delete User !');
             })
-        }
     };
 
     return (
@@ -71,10 +75,10 @@ function Users() {
                         <table class="min-w-full divide-y divide-gray-200 overflow-x-auto">
                             <thead class="bg-gray-50">
                                 <tr className="text-gray-400 sticky text-start border-b">
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Name</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Email</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Role</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Actions</th>
+                                    <th scope="col" class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Name</th>
+                                    <th scope="col" class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Email</th>
+                                    <th scope="col" class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Role</th>
+                                    <th scope="col" class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">

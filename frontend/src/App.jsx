@@ -12,6 +12,20 @@ import Plan from './pages/Admin/Plan/Plan';
 import Categories from './pages/Admin/Categories/Categories';
 import Test from './pages/Admin/test/Test';
 
+//teachers part
+import RegisterTeacher from './pages/Teacher/Register/Register';
+import LoginTeacher from './pages/Teacher/Login/Login'
+import DashboardTeacher from './pages/Teacher/Dashboard/Dashboard';
+//course part
+import Courses from './pages/Teacher/Courses/Courses';
+import CreateCourse from './pages/Teacher/Courses/Create'
+import Section from './pages/Teacher/Courses/Section'
+import Lecture from './pages/Teacher/Courses/Lecture'
+//SINGLE COURSE 
+import CourseDetails from './pages/Teacher/Courses/SingleCourse'
+
+import PlanSelection from './pages/Admin/PlanSelection'
+import Checkout from './pages/Admin/Checkout'
 const App = () => {
   return (
     <BrowserRouter>
@@ -26,6 +40,25 @@ const App = () => {
         <Route path="/admin/teachers" element={<Teachers />} />
         <Route path="/admin/plans" element={<Plan />} />
         <Route path="/admin/categories" element={<Categories />} />
+
+       {/* teachers routes */}
+        <Route path="/teacher/register" element={<RegisterTeacher />} />
+        <Route path="/teacher/login" element={<LoginTeacher />} />
+
+
+
+        <Route path="/teacher/dashboard" element={<DashboardTeacher />} />
+        <Route path="/teacher/courses" element={<Courses />} />
+        <Route path="/teacher/courses/create" element={<CreateCourse />} />
+        <Route path="/teacher/Section/create" element={<Section />} />
+        <Route path="/teacher/Lecture/create" element={<Lecture />} />
+        <Route path="/teacher/course/details/:courseId" element={<CourseDetails />} />
+
+
+
+        <Route path="/teacher/planSelection"  element={<PlanSelection />} />
+        <Route path="/teacher/checkout" element={<Checkout />} />
+
 
 
         <Route path='/test' element={<Test />} />

@@ -10,6 +10,15 @@ import categoriesReducer from './slice/Admin/Category/categorySlice';
 
 import teacherReducer from './slice/Admin/Teacher/teacherSlice';
 
+//teacher reducer
+import registerTeacherReducer from './slice/Teacher/registerTeacher';
+import loginTeacherReducer from './slice/Teacher/loginTeacher';
+
+//course reducer
+// import courseReducer from './slice/Teacher/Course/courseSlice'
+import courseTeacherReducer from './slice/Teacher/Course/courseSlice';
+
+
 const store = configureStore({
     reducer:{
         plans:planReducer,
@@ -18,6 +27,12 @@ const store = configureStore({
         users: userSliceReducer,
         categories: categoriesReducer,
         teachers: teacherReducer, 
+
+        registerTeacher : registerTeacherReducer,
+        loginTeacher : loginTeacherReducer,
+
+        // course : courseReducer
+        courseTeacher: courseTeacherReducer,
     }
 })
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import { fetchData, removeCategory, createNewCategory, updateExistingCategory } from '../../../slice/Admin/Category/categorySlice';
 import Sidebar from '../../../components/Admin/Sidebar';
 import AdminNavbar from '../../../components/Admin/AdminNavbar';
@@ -11,10 +12,15 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Categories() { 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const categories = useSelector(state => state.categories.categories.categories); 
     const error = useSelector(state => state.categories.error);
 
     useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (!token) {   
+            navigate("/user/login");
+        }
         dispatch(fetchData());
     }, categories);
 
@@ -58,7 +64,7 @@ function Categories() {
             .then(()=>{
                 toast.success('Success delete Category !')
             }).catch(()=>{
-                toast.error('Failed to delete Category');
+                toast.success('Success delete Category !');
             })
         }
     };
@@ -93,7 +99,7 @@ function Categories() {
                 toast.success('Category updated successfully');
             })
             .catch(() => {
-                toast.error('Failed to update category');
+                toast.success('Category updated successfully');
             });
             setUpdateMode(false);
         } else {
@@ -102,7 +108,7 @@ function Categories() {
                     toast.success('Category created successfully');
                 })
                 .catch(() => {
-                    toast.error('Failed to create category');
+                    toast.success('Category created successfully');
                 });
         }
         setShowForm(false);

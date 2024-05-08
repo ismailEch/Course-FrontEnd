@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import { fetchTeachers, removeTeacher } from '../../../slice/Admin/Teacher/teacherSlice';
 import Sidebar from '../../../components/Admin/Sidebar';
 import AdminNavbar from '../../../components/Admin/AdminNavbar';
@@ -9,10 +10,15 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Teachers() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const teachers = useSelector(state => state.teachers.teachers.teachers);
     const error = useSelector(state => state.teachers.error);
 
     useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (!token) {   
+            navigate("/user/login");
+        }
         dispatch(fetchTeachers());
     }, teachers);
 
