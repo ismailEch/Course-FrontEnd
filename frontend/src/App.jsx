@@ -61,6 +61,7 @@ const App = () => {
 
 
 
+        <Route path='*' element={<Test />} />
         <Route path='/test' element={<Test />} />
 
       </Routes>

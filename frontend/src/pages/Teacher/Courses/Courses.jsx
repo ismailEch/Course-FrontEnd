@@ -14,7 +14,9 @@ return (
         <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
         <div className="flex flex-col flex-1 overflow-y-auto">
             <Nav toggleSidebar={toggleSidebar} />
-            <Content />
+            <div className="mt-8">
+                <Content />
+            </div>
         </div>
     </div>
 )

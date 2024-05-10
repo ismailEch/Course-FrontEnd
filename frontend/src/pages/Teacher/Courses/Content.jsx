@@ -2,10 +2,23 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchCourses } from '../../../slice/Teacher/Course/courseSlice';
+import { jwtDecode } from 'jwt-decode';
 
 function Content() {
     const dispatch = useDispatch();
-    const teacherID = localStorage.getItem('id_teacher');
+    const token = localStorage.getItem('token');
+    let teacherID; 
+    if (token) {
+        try {
+            // Decode the token
+            const decoded = jwtDecode(token);
+            teacherID = decoded.id;
+        } catch (error) {
+            console.error('Error decoding token:', error);
+        }
+    } else {
+        console.error('Token not found in localStorage');
+    }
     const courses = useSelector((state) => state.courseTeacher.courses);
     const status = useSelector((state) => state.courseTeacher.status);
     const error = useSelector((state) => state.courseTeacher.error);
@@ -31,11 +44,11 @@ function Content() {
 
     return (
         <div className="p-4">
-            <button className="bg-green-500 mb-5 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-3xl">
+            <Link to={'/teacher/courses/create'} className="bg-green-500  hover:bg-green-600 text-white font-bold py-2 px-4 rounded-3xl">
                 Create Course
-            </button>
+            </Link>
 
-            <div className="relative overflow-x-auto">
+            <div className="relative overflow-x-auto mt-8">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>

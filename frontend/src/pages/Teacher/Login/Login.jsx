@@ -13,6 +13,13 @@ const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const teacherId = localStorage.getItem('id_teacher');
+        if (teacherId) {
+            navigate('/teacher/dashboard');
+        }
+    }, []);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -53,7 +60,7 @@ const Login = () => {
                 //  Check if teacher_id exists in any subscriptions
                 const isSubscribed = subscriptionsData.subscriptions.some(subscription => subscription.teacher === response.payload.data.teacher_id);
                 if (isSubscribed) {
-                    console.log('You are subscribed');
+                    navigate('/teacher/dashboard')
                 } else {
                     navigate('/teacher/planSelection')
                 }
@@ -65,9 +72,8 @@ const Login = () => {
     };
 
     return (
-        <div className='' style={{ backgroundColor: '#2C1F4A' }}>
-            <Navbar />
-            <div className="py-16 mt-[-42px]">
+        <div>
+            <div className="py-16 mb-[-42px]">
                 <div className="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
                     <div className="hidden lg:block lg:w-1/2 bg-cover" style={{backgroundImage: `url(${loginPic})`}}></div>
                     <div className="w-full p-8 lg:w-1/2">
