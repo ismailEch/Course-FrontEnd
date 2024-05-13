@@ -1,50 +1,46 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchCourses } from '../../../slice/Teacher/Course/courseSlice';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-function Test() {
-    const dispatch = useDispatch();
-    const teacherID = localStorage.getItem('id_teacher');
-    const courses = useSelector((state) => state.courseTeacher.courses);
-    const status = useSelector((state) => state.courseTeacher.status);
-    const error = useSelector((state) => state.courseTeacher.error);
+const Test = () => {
+  const [subscription, setSubscription] = useState(null);
 
-    useEffect(() => {
-        if (teacherID) {
-            dispatch(fetchCourses(teacherID));
-        }
-    }, courses);
+  useEffect(() => {
+    const teacherId = localStorage.getItem('id_teacher');
+    if (teacherId) {
+      axios.get(`http://localhost:3000/api/subscription/teacher/plan/${teacherId}`)
+        .then(response => {
+          setSubscription(response.data.subscription);
+        })
+        .catch(error => {
+          console.error('Error fetching subscription:', error);
+        });
+    }
+  }, []);
 
-    return (
+  return (
+    <div>
+      {subscription ? (
         <div>
-           
-                <div>
-                    <h1>Courses</h1>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Level</th>
-                                <th>Valid</th>
-                                <th>Price</th>
-                                <th>Language</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {courses.map((course) => (
-                                <tr key={course._id}>
-                                    <td>{course.title}</td>
-                                    <td>{course.level}</td>
-                                    <td>{course.valid}</td>
-                                    <td>{course.price}</td>
-                                    <td>{course.language}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+          <h2>Subscription Plan Details</h2>
+          <p><strong>Teacher:</strong> {subscription.teacher.FirstName} {subscription.teacher.LastName}</p>
+          <p><strong>Email:</strong> {subscription.teacher.email}</p>
+          <p><strong>Plan Name:</strong> {subscription.plan.name}</p>
+          <p><strong>Price:</strong> ${subscription.plan.price}</p>
+          <p><strong>Description:</strong> {subscription.plan.description}</p>
+          <p><strong>Features:</strong></p>
+          <ul>
+            {subscription.plan.features.map((feature, index) => (
+              <li key={index}>{feature}</li>
+            ))}
+          </ul>
+          <p><strong>Start Date:</strong> {new Date(subscription.startDate).toLocaleDateString()}</p>
+          <p><strong>End Date:</strong> {new Date(subscription.endDate).toLocaleDateString()}</p>
         </div>
-    );
-}
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
+  );
+};
 
 export default Test;

@@ -23,7 +23,12 @@ import Section from './pages/Teacher/Courses/Section'
 import Lecture from './pages/Teacher/Courses/Lecture'
 //SINGLE COURSE 
 import CourseDetails from './pages/Teacher/Courses/SingleCourse'
+//plan and subscription part
+import TeacherPlan from './pages/Teacher/Plan/Plan'
 
+
+
+//payment
 import PlanSelection from './pages/Admin/PlanSelection'
 import Checkout from './pages/Admin/Checkout'
 const App = () => {
@@ -48,11 +53,14 @@ const App = () => {
 
 
         <Route path="/teacher/dashboard" element={<DashboardTeacher />} />
+        {/* courses */}
         <Route path="/teacher/courses" element={<Courses />} />
         <Route path="/teacher/courses/create" element={<CreateCourse />} />
         <Route path="/teacher/Section/create" element={<Section />} />
         <Route path="/teacher/Lecture/create" element={<Lecture />} />
         <Route path="/teacher/course/details/:courseId" element={<CourseDetails />} />
+        {/* plan and subscription */}
+        <Route path="/teacher/plan/details" element={<TeacherPlan />} />
 
 
 
