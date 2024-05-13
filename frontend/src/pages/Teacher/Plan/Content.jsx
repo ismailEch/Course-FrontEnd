@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 
 
 function Content() {
     const [subscription, setSubscription] = useState(null);
+    const navigate = useNavigate()
 
 useEffect(() => {
     const token = localStorage.getItem('token');
@@ -20,8 +22,8 @@ useEffect(() => {
     } else {
         console.error('Token not found in localStorage');
     }
-    if (teacherID) { // Corrected variable name
-        axios.get(`http://localhost:3000/api/subscription/teacher/plan/${teacherID}`) // Corrected variable name
+    if (teacherID) { 
+        axios.get(`http://localhost:3000/api/subscription/teacher/plan/${teacherID}`) 
             .then(response => {
                 setSubscription(response.data.subscription);
             })
@@ -30,6 +32,18 @@ useEffect(() => {
             });
     }
 },subscription); 
+const handleDeletePlan = () => {
+    if (subscription) {
+        axios.delete(`http://localhost:3000/api/subscription/teacher/plan/${subscription._id}`)
+            .then(response => {
+                localStorage.removeItem('token');
+                navigate('/teacher/dashboard')
+            })
+            .catch(error => {
+                console.error('Error deleting plan:', error);
+            });
+    }
+};
 
     if (!subscription) {
         return<div className="border-gray-300 m-auto h-20 w-20 animate-spin rounded-full border-8 border-t-blue-600" />
@@ -57,10 +71,12 @@ useEffect(() => {
                             </li>
                         ))}
         </ul>
-        <a href={`/${subscription._id}`}
-            className="block px-8 py-3 text-sm font-semibold text-center text-white transition duration-100 bg-white rounded-lg outline-none bg-opacity-20 hover:bg-opacity-30 md:text-base">
-            Delete Plan
-        </a>
+        <a
+                onClick={handleDeletePlan} // Add onClick event handler
+                className="block px-8 py-3 text-sm font-semibold text-center text-white transition duration-100 bg-white rounded-lg outline-none bg-opacity-20 hover:bg-opacity-30 md:text-base"
+            >
+                Delete Plan 
+            </a>
 
         </div>
     </div>
