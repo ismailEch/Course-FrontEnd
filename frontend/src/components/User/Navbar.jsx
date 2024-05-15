@@ -64,7 +64,7 @@ import { SlBasket } from "react-icons/sl";
 
 const Navbar = () => {
   const navItems = [
-    { link: "Home", path: "/home" },
+    { link: "Home", path: "/" },
     { link: "About", path: "/about" },
     { link: "Courses", path: "/courses" },
     { link: "Blog", path: "/blog" },
