@@ -29,7 +29,7 @@ const Footer = () => {
            
             {/* Middle part with quick links */}
             <div className="mb-2 md:mb-4 gap-10">
-              <h2 className="text-sm font-bold mb-2">Quick Links</h2>
+              <h2 className="text-sm  text-white font-bold mb-2">Quick Links</h2>
               <ul className='flex gap-16'>
                 <div>
                 <li><a href="home">Home</a></li>
@@ -47,7 +47,7 @@ const Footer = () => {
             
             {/* Right part with contact information */}
             <div>
-              <h2 className="text-sm mr-20 font-bold mb-10">Contact Us</h2>
+              <h2 className="text-sm mr-20 text-white font-bold mb-10">Contact Us</h2>
               <p className="text-sm">Phone: +1234567890</p>
               <p className="text-sm">Email: academia@contact.com</p>
             </div>
