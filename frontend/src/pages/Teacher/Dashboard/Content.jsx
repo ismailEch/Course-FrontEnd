@@ -1,11 +1,10 @@
 import React from 'react'
-// import jwt from 'jwt-decode'
 import { jwtDecode } from 'jwt-decode';
 
 
 
 function Content() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token_teacher');
     if (token) {
         try {
             // Decode the token

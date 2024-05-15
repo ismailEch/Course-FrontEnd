@@ -14,8 +14,8 @@ const Login = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const teacherId = localStorage.getItem('id_teacher');
-        if (teacherId) {
+        const token = localStorage.getItem('token_teacher');
+        if (token) {
             navigate('/teacher/dashboard');
         }
     }, []);
@@ -45,7 +45,7 @@ const Login = () => {
     
         try {
             const response = await dispatch(loginTeacher(data));
-            console.log(response);
+            // console.log(response);
             if (response.payload && response.payload.message === 'Incorrect email or password') {
                 toast.error(response.payload.message);
             } else if (response.payload && response.payload.data.message === 'Seccuss') {
@@ -55,7 +55,7 @@ const Login = () => {
                 // Fetch all subscriptions
                 const subscriptionsResponse = await fetch('http://localhost:3000/api/teacherPayment/all-subscriptions');
                 const subscriptionsData = await subscriptionsResponse.json();
-                console.log(subscriptionsData);
+                // console.log(subscriptionsData);
 
                 //  Check if teacher_id exists in any subscriptions
                 const isSubscribed = subscriptionsData.subscriptions.some(subscription => subscription.teacher === response.payload.data.teacher_id);

@@ -1,10 +1,24 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 
 function CreateContent() {
     const navigate = useNavigate();
-    const instructorId = localStorage.getItem('id_teacher') || '';
+    const token = localStorage.getItem('token_teacher');
+    let instructorId; 
+    if (token) {
+        try {
+            // Decode the token
+            const decoded = jwtDecode(token);
+            instructorId = decoded.id;
+        } catch (error) {
+            console.error('Error decoding token:', error);
+        }
+    } else {
+        console.error('Token not found in localStorage');
+    }
+    // const instructorId = localStorage.getItem('id_teacher') || '';
 
     const [courseDetails, setCourseDetails] = useState({
         title: '',
@@ -36,7 +50,7 @@ function CreateContent() {
             formData.append('level', courseDetails.level);
             formData.append('price', courseDetails.price);
             formData.append('cover', courseDetails.cover);
-            formData.append('instructor', instructorId); // Set instructor value from localStorage
+            formData.append('instructor', instructorId);
             formData.append('Category', courseDetails.Category);
 
             const response = await axios.post('http://localhost:3000/api/course', formData, {

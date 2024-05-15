@@ -14,9 +14,9 @@ const initialState = {
 export const loginTeacher = createAsyncThunk('user/loginTeacher', async (formdata , {rejectWithValue})=>{
     try {
         const response = await axios.post('http://localhost:3000/api/authTeacher/login', formdata)
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('id_teacher', response.data.teacher_id);
-        saveToken(response.data.token);
+        localStorage.setItem('token_teacher', response.data.token);
+        // localStorage.setItem('id_teacher', response.data.teacher_id);
+        // saveToken(response.data.token);
         return { data :response.data, token: response.data.token};
     } catch (error) {
         return rejectWithValue(error.response.data);
