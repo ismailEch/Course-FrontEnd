@@ -6,11 +6,14 @@ import profil8 from '../../assets/profil8.svg';
 
 const EnrollPage = () => {
   const [courses, setCourses] = useState([]);
+  const [categories, setCategories] = useState([]);
   useEffect(() => {
     const fetchCourses = async () => {
       try {
         const response = await axios.get('http://localhost:3000/api/course/all');
+        const response1 = await axios.get('http://localhost:3000/api/category');
         setCourses(response.data.courses.slice(-8));
+        setCategories(response1.data.categories);
         // console.log(response.data.courses); // Log the fetched courses
       } catch (error) {
         console.error('Error fetching courses:', error);
@@ -30,11 +33,15 @@ const EnrollPage = () => {
 
 
       <div className="flex flex-wrap md:flex-nowrap  gap-2 mb-6">
-        <div className="rounded-md bg-rich-purple px-4 py-2 text-white hover:bg-purple-700 flex items-center justify-between">Design</div>
-        <div className="rounded-md bg-rich-purple px-4 py-2 text-white hover:bg-purple-700 flex items-center justify-between">Web Development</div>
-        <div className="rounded-md bg-rich-purple px-4 py-2 text-white hover:bg-purple-700 flex items-center justify-between">Marketing</div>
-        <div className="rounded-md bg-rich-purple px-4 py-2 text-white hover:bg-purple-700 flex items-center justify-between">UI/UX</div>
-    </div>
+          {categories.map(category => (
+            <div
+              key={category.id} // Assuming category has an id
+              className="rounded-md bg-rich-purple px-4 py-2 text-white hover:bg-purple-700 flex items-center justify-between"
+            >
+              {category.name}
+            </div>
+          ))}
+        </div>
 
 
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ">
