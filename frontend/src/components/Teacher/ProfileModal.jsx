@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -12,7 +13,20 @@ const ProfileModal = ({ onClose }) => {
 
     useEffect(() => {
         const fetchTeacherInfo = async () => {
-            const teacherId = localStorage.getItem('id_teacher');
+            let teacherId;
+            const token = localStorage.getItem('token_teacher');
+            if (token) {
+                try {
+                    const decoded = jwtDecode(token);
+                    teacherId = decoded.id; 
+                    // console.log(Id);
+                } catch (error) {
+                    console.error('Error decoding token:', error);
+                }
+            } else {
+                console.error('Token not found in localStorage');
+            }
+            // const teacherId = localStorage.getItem('id_teacher');
             if (teacherId) {
                 try {
                     const response = await fetch(`http://localhost:3000/api/teacher/${teacherId}`);

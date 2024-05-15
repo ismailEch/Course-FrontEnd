@@ -9,20 +9,22 @@ import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
-function Categories() { 
+function Categories() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const categories = useSelector(state => state.categories.categories.categories); 
+    const categories = useSelector(state => state.categories.categories.categories);
     const error = useSelector(state => state.categories.error);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        if (!token) {   
+        if (!token) {
             navigate("/user/login");
         }
         dispatch(fetchData());
-    }, categories);
+    },categories);
 
     const [showForm, setShowForm] = useState(false);
     const [formData, setFormData] = useState({
@@ -37,6 +39,8 @@ function Categories() {
     });
     const [searchInput, setSearchInput] = useState('');
     const [filteredCategories, setFilteredCategories] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 5;
 
     useEffect(() => {
         setFilteredCategories(filterCategories(categories, searchInput));
@@ -61,11 +65,11 @@ function Categories() {
     const handleDeleteCategory = (categoryId) => {
         if (window.confirm("Are you sure you want to delete this category?")) {
             dispatch(removeCategory(categoryId))
-            .then(()=>{
-                toast.success('Success delete Category !')
-            }).catch(()=>{
-                toast.success('Success delete Category !');
-            })
+                .then(() => {
+                    toast.success('Success delete Category !')
+                }).catch(() => {
+                    toast.success('Success delete Category !');
+                })
         }
     };
 
@@ -95,12 +99,12 @@ function Categories() {
 
         if (updateMode) {
             dispatch(updateExistingCategory({ id: selectedCategory._id, categoryData: formData }))
-            .then(() => {
-                toast.success('Category updated successfully');
-            })
-            .catch(() => {
-                toast.success('Category updated successfully');
-            });
+                .then(() => {
+                    toast.success('Category updated successfully');
+                })
+                .catch(() => {
+                    toast.success('Category updated successfully');
+                });
             setUpdateMode(false);
         } else {
             dispatch(createNewCategory(formData))
@@ -118,6 +122,12 @@ function Categories() {
         });
     };
 
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredCategories.slice(indexOfFirstItem, indexOfLastItem);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     return (
         <div className='flex' style={{ backgroundColor: '#f4f4f4' }}>
             <Sidebar />
@@ -128,11 +138,11 @@ function Categories() {
                     <button className="bg-blue-500 text-white px-4 py-2 rounded-md mb-4" onClick={() => setShowForm(true)}>+ Add New</button>
                 </div>
 
-                {Array.isArray(categories)  && categories.length === 0 && (
+                {Array.isArray(currentItems) && currentItems.length === 0 && (
                     <div className="text-center my-4">No categories found</div>
                 )}
 
-                {Array.isArray(categories) && categories.length > 0 && (
+                {Array.isArray(currentItems) && currentItems.length > 0 && (
                     <div className="table-container mt-8 px-3 h-[450px] overflow-auto rounded-lg mb-6" style={{ backgroundColor: '#f4f4f4' }}>
                         <table className="relative w-full bg-white shadow-md rounded-s-lg">
                             <thead className="sticky top-0 bg-white shadow-sm z-10">
@@ -143,22 +153,26 @@ function Categories() {
                                 </tr>
                             </thead>
                             <tbody>
-                            {Array.isArray(filteredCategories) && filteredCategories.map((category) => (
+                                {currentItems.map((category) => (
                                     <tr key={category._id} className="hover:bg-gray-100 cursor-pointer rounded-md border-b">
                                         <td className="font-normal pr-4 text-gray-700 p-3 text-center">{category.name}</td>
                                         <td className="font-normal pr-4 text-gray-700 p-3 text-center">{category.description}</td>
                                         <td className="text-center">
                                             <div className="flex items-center justify-center"> {/* Added justify-center to center the icons horizontally */}
-                                                <FaEdit className='text-2xl text-blue-500 hover:text-blue-800 cursor-pointer mr-3' onClick={() => handleUpdateCategory(category._id)}/>
-                                                <MdDelete className='text-2xl text-red-600 hover:text-red-800 cursor-pointer' onClick={() => handleDeleteCategory(category._id)}/>
+                                                <FaEdit className='text-2xl text-blue-500 hover:text-blue-800 cursor-pointer mr-3' onClick={() => handleUpdateCategory(category._id)} />
+                                                <MdDelete className='text-2xl text-red-600 hover:text-red-800 cursor-pointer' onClick={() => handleDeleteCategory(category._id)} />
                                             </div>
                                         </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
+                        <div className="mt-4 px-3 flex justify-start">
+                            <Pagination count={Math.ceil(filteredCategories.length / itemsPerPage)} color="primary" onChange={(e, value) => paginate(value)} />
+                        </div>
                     </div>
                 )}
+
 
                 {showForm && (
                     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -167,12 +181,12 @@ function Categories() {
                                 <h2 className="text-2xl font-semibold mb-4">{updateMode ? 'Update Category' : 'Create New Category'}</h2>
                                 <div className="mb-4">
                                     <label className="block text-sm font-medium text-gray-700">Name</label>
-                                    <input type="text" name="name" value={formData.name} onChange={handleInputChange} className="border border-gray-300 rounded-md p-2 block w-full"  required />
+                                    <input type="text" name="name" value={formData.name} onChange={handleInputChange} className="border border-gray-300 rounded-md p-2 block w-full" required />
                                     {errors.name && <span className="text-red-500">{errors.name}</span>}
                                 </div>
                                 <div className="mb-4">
                                     <label className="block text-sm font-medium text-gray-700">Description</label>
-                                    <textarea name="description" value={formData.description} onChange={handleInputChange} className="border border-gray-300 rounded-md p-2 block w-full"  required />
+                                    <textarea name="description" value={formData.description} onChange={handleInputChange} className="border border-gray-300 rounded-md p-2 block w-full" required />
                                     {errors.description && <span className="text-red-500">{errors.description}</span>}
                                 </div>
                             </div>

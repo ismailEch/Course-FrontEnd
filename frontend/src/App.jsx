@@ -31,6 +31,9 @@ import TeacherPlan from './pages/Teacher/Plan/Plan'
 //payment
 import PlanSelection from './pages/Admin/PlanSelection'
 import Checkout from './pages/Admin/Checkout'
+import PaymentTeacherDone from './pages/Teacher/Payment/paymentSuccess'
+
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -63,9 +66,11 @@ const App = () => {
         <Route path="/teacher/plan/details" element={<TeacherPlan />} />
 
 
-
+      {/* payment  */}
         <Route path="/teacher/planSelection"  element={<PlanSelection />} />
         <Route path="/teacher/checkout" element={<Checkout />} />
+        <Route path="/teacher/paymentsuccess" element={<PaymentTeacherDone />} />
+
 
 
 

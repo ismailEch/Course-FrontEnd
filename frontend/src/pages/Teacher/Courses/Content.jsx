@@ -6,7 +6,7 @@ import { jwtDecode } from 'jwt-decode';
 
 function Content() {
     const dispatch = useDispatch();
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token_teacher');
     let teacherID; 
     if (token) {
         try {

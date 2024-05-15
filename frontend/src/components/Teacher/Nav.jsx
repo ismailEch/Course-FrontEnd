@@ -12,8 +12,8 @@ const Nav = ({ toggleSidebar }) => {
     const navigate = useNavigate();  
 
     const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('id_teacher');
+        localStorage.removeItem('token_teacher');
+        // localStorage.removeItem('id_teacher');
         navigate('/teacher/login');
     };
 

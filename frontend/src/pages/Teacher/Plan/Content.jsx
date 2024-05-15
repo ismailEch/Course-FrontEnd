@@ -9,7 +9,7 @@ function Content() {
     const navigate = useNavigate()
 
 useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token_teacher');
     let teacherID; 
     if (token) {
         try {
