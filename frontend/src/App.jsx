@@ -34,6 +34,11 @@ import Checkout from './pages/Admin/Checkout'
 import PaymentTeacherDone from './pages/Teacher/Payment/paymentSuccess'
 
 
+
+//users pages
+import About from './pages/User/About/About';
+
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -42,6 +47,8 @@ const App = () => {
         <Route path="/" element={<Welcome />} />
         <Route path="/user/register" element={<Register />} />
         <Route path="/user/login" element={<Login />} />
+        {/* //user routes */}
+        <Route path="/about" element={<About />} />
         {/* admin routes */}
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/admin/users" element={<Users />} />
