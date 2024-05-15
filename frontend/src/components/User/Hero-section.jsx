@@ -14,7 +14,7 @@ const HeroSection = () => {
             </div>
           </div>
 
-          <div className="">
+          <div className="lg:w-1/2">
             <img src={hero} alt="Vector Image" className="hidden md:block w-full"/>
           </div>
 
