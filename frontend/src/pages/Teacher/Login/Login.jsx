@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { loginTeacher } from '../../../slice/Teacher/loginTeacher';
 import Navbar from '../../../components/User/Navbar';
 import { toast } from 'react-toastify';
@@ -126,7 +126,7 @@ const Login = () => {
                         </form>
                         <div className="mt-4 flex items-center justify-between">
                             <span className="border-b w-1/5 md:w-1/4"></span>
-                            <a href="#" className="text-xs text-gray-500 uppercase">or sign up</a>
+                            <Link to={"/teacher/register"} className="text-xs text-gray-500 uppercase">or sign up</Link>
                             <span className="border-b w-1/5 md:w-1/4"></span>
                         </div>
                     </div>

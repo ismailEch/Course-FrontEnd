@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { registerTeacher } from '../../../slice/Teacher/registerTeacher';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../../../components/User/Navbar';
 import loginPic from '../../../../public/assets/login.svg'
 import Footer from '../../../components/User/Footer';
@@ -67,7 +67,7 @@ return (
     
 <div className='' style={{ backgroundColor: '#2C1F4A' }}>
     <Navbar />
-    <div className="py-16 mt-[-42px]">
+    <div className="py-16  mt-20">
         <div className="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
             <div className="hidden lg:block lg:w-1/2 bg-cover"
                 style={{backgroundImage: `url(${loginPic})`}}>
@@ -153,7 +153,7 @@ return (
 
             <div className="mt-4 flex items-center justify-between">
                 <span className="border-b w-1/5 md:w-1/4"></span>
-                <a href="#" className="text-xs text-gray-500 uppercase">or sign up</a>
+                <Link to={'/teacher/login'} className="text-xs text-gray-500 uppercase">or sign up</Link>
                 <span className="border-b w-1/5 md:w-1/4"></span>
             </div>
             </div>
