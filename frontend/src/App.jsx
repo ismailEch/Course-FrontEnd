@@ -37,6 +37,7 @@ import PaymentTeacherDone from './pages/Teacher/Payment/paymentSuccess'
 
 //users pages
 import About from './pages/User/About/About';
+import CategoryCourses from './components/User/CategoryCourses';
 
 
 const App = () => {
@@ -49,6 +50,9 @@ const App = () => {
         <Route path="/user/login" element={<Login />} />
         {/* //user routes */}
         <Route path="/about" element={<About />} />
+        {/* <Route path="/category:categoryName" element={<CategoryCourses />} /> */}
+        <Route path="/category/:categoryName" element={<CategoryCourses />} />
+        
         {/* admin routes */}
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/admin/users" element={<Users />} />
