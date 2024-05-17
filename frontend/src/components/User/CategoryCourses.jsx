@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import profil8 from '../../assets/profil8.svg';
 import { useParams, Link } from 'react-router-dom';
+import Navbar from './Navbar';
+import HeroSection from './Hero-section';
+import PopularCategory from './PopularCategory';
+import  Footer from './Footer'
 
 const CategoryCourses = () => {
   const { categoryName } = useParams();
@@ -41,7 +45,10 @@ const CategoryCourses = () => {
   }
 
   return (
-    <div className="bg-primary sm:w-full text-white py-20">
+    <div>
+      <Navbar />
+      <HeroSection />
+      <div className="bg-primary sm:w-full text-white py-20">
       <div className="max-w-7xl mx-auto px-4 w-11/12">
         <h1 className="text-3xl font-bold mb-6">
           <span className="text-white mr-2">Courses in</span>
@@ -50,6 +57,9 @@ const CategoryCourses = () => {
 
         {/* Category Links */}
         <div className="flex flex-wrap md:flex-nowrap gap-2 mb-6">
+          <Link to={'/'} className="rounded-md bg-rich-purple px-4 py-2 text-white hover:bg-purple-700 flex items-center justify-between">
+            All
+          </Link>
           {categories.map(category => (
             <Link
               key={category._id}
@@ -85,7 +95,11 @@ const CategoryCourses = () => {
           <button className="bg-purple-600 px-8 py-3 rounded-lg text-white font-bold hover:bg-purple-500 transition duration-300">Explore More</button>
         </div>
       </div>
+      </div>
+      <PopularCategory />
+      <Footer />
     </div>
+   
   );
 };
 
