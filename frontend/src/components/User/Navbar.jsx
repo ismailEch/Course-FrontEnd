@@ -61,6 +61,8 @@ import  { useState, useEffect } from 'react';
 import logo from '../../assets/Logo (2).svg';
 import { IoMdMenu } from "react-icons/io";
 import { SlBasket } from "react-icons/sl";
+import { BiSolidUserCircle } from "react-icons/bi";
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const navItems = [
@@ -72,6 +74,7 @@ const Navbar = () => {
   ];
 
   const [showMenu, setShowMenu] = useState(false);
+  const token = localStorage.getItem('token');
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -106,11 +109,21 @@ const Navbar = () => {
           ))}
         </ul>
       </div>
-      <div className="flex items-center space-x-2 mr-12"> {/* Buttons */}
-        <button className="hidden md:block px-3 py-2 rounded-md text-white bg-secondary hover:bg-purple-400">Get Started</button>
-        <button className="hidden md:block px-3 py-2 rounded-md text-white bg-secondary hover:bg-purple-400">Login</button>
-        <SlBasket className="w-6 h-6 text-white" /> {/* Cart icon */}
-      </div>
+
+
+      {token ? (
+        <div className="flex items-center space-x-2 mr-12"> {/* Logged in */}
+          <BiSolidUserCircle className='w-10 h-10 text-secondary cursor-pointer' />
+          <SlBasket className="w-6 h-6 text-white cursor-pointer" /> {/* Cart icon */}
+        </div>
+      ) : (
+        <div className="flex items-center space-x-2 mr-12"> {/* Not logged in */}
+          <Link to={'/register/option'} className="hidden md:block px-3 py-2 rounded-md text-white bg-secondary hover:bg-purple-400">Get Started</Link>
+          <Link to={'/login/option'} className="hidden md:block px-3 py-2 rounded-md text-white bg-secondary hover:bg-purple-400">Login</Link>
+        </div>
+      )}
+
+
       <div className={`md:hidden fixed top-20 right-0 w-full h-full bg-primary text-white transition duration-300 ease-in-out z-20 ${showMenu ? 'visible' : 'invisible'}`}>
         <ul className="flex flex-col items-start p-4 space-y-4">
           {navItems.map(({ link, path }) => (

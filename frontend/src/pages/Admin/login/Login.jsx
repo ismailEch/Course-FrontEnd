@@ -46,7 +46,7 @@ const Login = () => {
                 if (response.payload.role === 'admin') {
                     navigate('/admin/dashboard');
                 } else if(response.payload.role === 'user') {
-                    alert('Welcome User');
+                    navigate('/')
                 }
             }
         } catch (error) {
