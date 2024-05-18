@@ -80,7 +80,11 @@ const CategoryCourses = () => {
                 <p className="text-lg font-semibold text-gray-800 mb-2">{course.name}</p>
                 <div className="flex items-center mb-2">
                   <img src={profil8} alt={course.teacherName} className="w-8 h-8 rounded-full mr-2"/>
-                  <p className="text-sm text-gray-700">{course.instructor.FirstName} {course.instructor.LastName}</p>
+                  {course.instructor ? (
+                      <p className="text-sm text-gray-700">{course.instructor.FirstName} {course.instructor.LastName}</p>
+                    ) : (
+                      <p className="text-sm text-gray-700">Unknown Instructor</p>
+                    )}
                 </div>
                 <div className="flex items-center mb-2"></div>
                 <p className="text-gray-700 mb-2">{course.description.substring(0, 65)}...</p>
