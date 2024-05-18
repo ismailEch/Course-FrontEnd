@@ -15,6 +15,10 @@ export const removeUser = createAsyncThunk(
     }
 );
 
+export const updateUserRole = createAsyncThunk('users/updateUserRole', async ({ userId, newRole }) => {
+    return await userApi.updateUserRole(userId, newRole);
+});
+
 // Initial State
 const initialState = {
     users: [],
@@ -38,6 +42,12 @@ const userSlice = createSlice({
             })
             .addCase(removeUser.fulfilled, (state, action) => {
                 state.users = state.users.filter((user) => user._id !== action.payload._id);
+            })
+            .addCase(updateUserRole.fulfilled, (state, action) => {
+                const index = state.users.findIndex(user => user._id === action.payload._id);
+                if (index !== -1) {
+                    state.users[index].role = action.payload.role;
+                }
             });
     },
 });

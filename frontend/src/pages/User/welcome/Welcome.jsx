@@ -8,15 +8,15 @@ import PopularCategory from "../../../components/User/PopularCategory";
 
 function Welcome() {
    return (
-     <div className="">
-        <Navbar/>
-        <HeroSection/>
-        <EnrollPage/>
-        <PopularCategory/>
-        <Footer/>
-     </div>
-    )
- }
+      <div className="">
+         <Navbar/>
+         <HeroSection/>
+         <EnrollPage/>
+         <PopularCategory/>
+         <Footer/>
+      </div>
+   )
+}
 
- export default Welcome
+export default Welcome
 

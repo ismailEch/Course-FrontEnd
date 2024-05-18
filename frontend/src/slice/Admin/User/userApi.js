@@ -13,9 +13,20 @@ export const fetchAllUsers = async () => {
     }
 };
 
+
+
 export const deleteUser = async (userId) => {
     try {
         const response = await axios.delete(`${BASE_URL}/${userId}`);
+        return response.data;
+    } catch (error) {
+        throw error.response.data.message;
+    }
+};
+
+export const updateUserRole = async (userId, newRole) => {
+    try {
+        const response = await axios.patch(`${BASE_URL}/${userId}`, { role: newRole });
         return response.data;
     } catch (error) {
         throw error.response.data.message;
