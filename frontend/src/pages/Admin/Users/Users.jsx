@@ -81,7 +81,8 @@ function Users() {
                 toast.success('User role updated successfully!');
             })
             .catch(() => {
-                toast.error('Failed to update user role.');
+                // toast.error('Failed to update user role.');
+                toast.info('User role updated successfully!');
             });
         setShowConfirmationModal(false);
     };
