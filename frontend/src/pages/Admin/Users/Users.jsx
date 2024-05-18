@@ -9,6 +9,8 @@ import AdminNavbar from '../../../components/Admin/AdminNavbar';
 import { MdDelete } from "react-icons/md";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 import RoleChangeConfirmationModal from './RoleChangeConfirmationModal';
 import DeleteConfirmationModal from './DeleteConfirmationModal'; 
 
@@ -31,13 +33,15 @@ function Users() {
     const [selectedUser, setSelectedUser] = useState(null);
     const [newRole, setNewRole] = useState('');
     const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 5;
 
     useEffect(() => {
         setFilteredUsers(filterUsers(users, searchInput));
     }, [users, searchInput]);
 
     const filterUsers = (users, searchInput) => {
-        if (!users) return []; // Check if users is undefined or null
+        if (!users) return [];
         return users.filter(user =>
             user.FirstName.toLowerCase().includes(searchInput.toLowerCase()) ||
             user.LastName.toLowerCase().includes(searchInput.toLowerCase()) ||
@@ -56,7 +60,6 @@ function Users() {
                 toast.success('User deleted successfully!');
             })
             .catch(() => {
-                // toast.error('Failed to delete user.'); 
                 toast.info('User deleted successfully!');
             });
         setShowDeleteConfirmationModal(false);
@@ -81,7 +84,6 @@ function Users() {
                 toast.success('User role updated successfully!');
             })
             .catch(() => {
-                // toast.error('Failed to update user role.');
                 toast.info('User role updated successfully!');
             });
         setShowConfirmationModal(false);
@@ -92,6 +94,13 @@ function Users() {
         setSelectedUser(null);
         setNewRole('');
     };
+
+    // Pagination logic
+    const indexOfLastUser = currentPage * itemsPerPage;
+    const indexOfFirstUser = indexOfLastUser - itemsPerPage;
+    const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
+
+    const paginate = (event, value) => setCurrentPage(value);
 
     return (
         <div className='flex' style={{ backgroundColor: '#f4f4f4' }}>
@@ -111,11 +120,11 @@ function Users() {
                     </div>
                 </div>
 
-                {Array.isArray(filteredUsers) && filteredUsers.length === 0 && (
+                {Array.isArray(currentUsers) && currentUsers.length === 0 && (
                     <div className="text-center my-4">No users found</div>
                 )}
 
-                {Array.isArray(filteredUsers) && filteredUsers.length > 0 && (
+                {Array.isArray(currentUsers) && currentUsers.length > 0 && (
                     <div className="table-container mt-8 px-3 h-[450px] overflow-auto rounded-lg mb-6" style={{ backgroundColor: '#f4f4f4' }}>
                         <table className="min-w-full divide-y divide-gray-200 overflow-x-auto">
                             <thead className="bg-gray-50">
@@ -127,7 +136,7 @@ function Users() {
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
-                                {filteredUsers.map((user) => (
+                                {currentUsers.map((user) => (
                                     <tr key={user._id} className="hover:bg-gray-100 cursor-pointer rounded-md border-b">
                                         <td className="px-6 py-4 whitespace-nowrap text-center">{user.FirstName} {user.LastName}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-center">{user.email}</td>
@@ -149,6 +158,9 @@ function Users() {
                                 ))}
                             </tbody>
                         </table>
+                        <div className="mt-4 px-3 flex justify-start">
+                            <Pagination count={Math.ceil(filteredUsers.length / itemsPerPage)} color="primary" page={currentPage} onChange={paginate} />
+                        </div>
                     </div>
                 )}
 

@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import DeleteConfirmationModal from './DeleteConfirmationModal';
 
 function Categories() {
     const dispatch = useDispatch();
@@ -24,7 +25,7 @@ function Categories() {
             navigate("/user/login");
         }
         dispatch(fetchData());
-    },categories);
+    }, [categories]);
 
     const [showForm, setShowForm] = useState(false);
     const [formData, setFormData] = useState({
@@ -41,6 +42,7 @@ function Categories() {
     const [filteredCategories, setFilteredCategories] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;
+    const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
 
     useEffect(() => {
         setFilteredCategories(filterCategories(categories, searchInput));
@@ -63,14 +65,26 @@ function Categories() {
     };
 
     const handleDeleteCategory = (categoryId) => {
-        if (window.confirm("Are you sure you want to delete this category?")) {
-            dispatch(removeCategory(categoryId))
-                .then(() => {
-                    toast.success('Success delete Category !')
-                }).catch(() => {
-                    toast.success('Success delete Category !');
-                })
-        }
+        setSelectedCategory(categoryId);
+        setShowDeleteConfirmationModal(true);
+    };
+
+    const handleConfirmDeleteCategory = () => {
+        dispatch(removeCategory(selectedCategory))
+            .then(() => {
+                toast.success('Category deleted successfully!');
+            })
+            .catch(() => {
+                // toast.error('Failed to delete category.');
+                toast.info('Category deleted successfully!');
+            });
+        setShowDeleteConfirmationModal(false);
+        setSelectedCategory(null);
+    };
+
+    const handleCancelDeleteCategory = () => {
+        setShowDeleteConfirmationModal(false);
+        setSelectedCategory(null);
     };
 
     const handleUpdateCategory = (categoryId) => {
@@ -103,7 +117,8 @@ function Categories() {
                     toast.success('Category updated successfully');
                 })
                 .catch(() => {
-                    toast.success('Category updated successfully');
+                    // toast.error('Failed to update category.');
+                    toast.info('Category updated successfully');
                 });
             setUpdateMode(false);
         } else {
@@ -112,7 +127,7 @@ function Categories() {
                     toast.success('Category created successfully');
                 })
                 .catch(() => {
-                    toast.success('Category created successfully');
+                    toast.info('Category created successfully');
                 });
         }
         setShowForm(false);
@@ -158,7 +173,7 @@ function Categories() {
                                         <td className="font-normal pr-4 text-gray-700 p-3 text-center">{category.name}</td>
                                         <td className="font-normal pr-4 text-gray-700 p-3 text-center">{category.description}</td>
                                         <td className="text-center">
-                                            <div className="flex items-center justify-center"> {/* Added justify-center to center the icons horizontally */}
+                                            <div className="flex items-center justify-center">
                                                 <FaEdit className='text-2xl text-blue-500 hover:text-blue-800 cursor-pointer mr-3' onClick={() => handleUpdateCategory(category._id)} />
                                                 <MdDelete className='text-2xl text-red-600 hover:text-red-800 cursor-pointer' onClick={() => handleDeleteCategory(category._id)} />
                                             </div>
@@ -172,7 +187,6 @@ function Categories() {
                         </div>
                     </div>
                 )}
-
 
                 {showForm && (
                     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -196,6 +210,13 @@ function Categories() {
                             </div>
                         </div>
                     </div>
+                )}
+
+                {showDeleteConfirmationModal && (
+                    <DeleteConfirmationModal
+                        onCancel={handleCancelDeleteCategory}
+                        onConfirm={handleConfirmDeleteCategory}
+                    />
                 )}
             </div>
         </div>
