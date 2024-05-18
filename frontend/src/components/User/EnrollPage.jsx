@@ -42,7 +42,7 @@ const EnrollPage = () => {
           <div key={course.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
               <img src={course.cover} alt={course.name} className="w-full h-36 object-cover"/>
               <div className="px-4 py-4">
-                  <p className="text-lg font-semibold text-gray-800 mb-2">{course.name}</p>
+                  <p className="text-lg font-semibold text-white mb-2">{course.name}</p>
                   <div className="flex items-center mb-2">
                       <img src={profil8} alt={course.teacherName} className="w-8 h-8 rounded-full mr-2"/>
                       <p className="text-sm text-gray-700">{course.instructor.FirstName} {course.instructor.LastName}</p>
