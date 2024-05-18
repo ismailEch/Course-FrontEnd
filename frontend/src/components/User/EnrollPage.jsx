@@ -20,7 +20,7 @@ const EnrollPage = () => {
     };
 
     fetchCourses();
-  },courses);
+  }, [courses]);
 
   return (
     <div className="bg-primary sm:w-full text-white py-20">

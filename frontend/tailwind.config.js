@@ -12,7 +12,9 @@ export default {
         "tartiary": "#707070",
         "pink": "#EE9AE5",
         "light-gray": "#C2BEBE",
-        "rich-purple": "#524870"
+        "rich-purple": "#524870",
+        "red": "#FF5156",
+        "deep-red": "#A20308"
       }
     },
   },
