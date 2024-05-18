@@ -13,6 +13,8 @@ export const fetchAllUsers = async () => {
     }
 };
 
+
+
 export const deleteUser = async (userId) => {
     try {
         const response = await axios.delete(`${BASE_URL}/${userId}`);
