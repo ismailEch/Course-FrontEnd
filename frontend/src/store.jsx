@@ -9,6 +9,7 @@ import userSliceReducer from './slice/Admin/User/userSlice';
 import categoriesReducer from './slice/Admin/Category/categorySlice';
 
 import teacherReducer from './slice/Admin/Teacher/teacherSlice';
+import coursesReducer from './slice/Admin/Courses/CoursesSlice'
 
 //teacher reducer
 import registerTeacherReducer from './slice/Teacher/registerTeacher';
@@ -27,6 +28,7 @@ const store = configureStore({
         users: userSliceReducer,
         categories: categoriesReducer,
         teachers: teacherReducer, 
+        courses: coursesReducer, 
 
         registerTeacher : registerTeacherReducer,
         loginTeacher : loginTeacherReducer,

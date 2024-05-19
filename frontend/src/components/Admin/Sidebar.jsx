@@ -34,6 +34,17 @@ function Sidebar() {
                         </li>
 
                         <li className="flex items-center justify-center p-2 hover:bg-gray-200">
+                            <Link to="/admin/courses" className="w-full h-full flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.65 15.35a6 6 0 018.7 0M20 8V6a4 4 0 00-8 0v2" />
+                                </svg>
+                                <span className="hidden md:inline ml-2">Courses</span>
+                            </Link>   
+                        </li>
+                        <li className="flex items-center justify-center p-2 hover:bg-gray-200">
                             <Link to="/admin/users" className="w-full h-full flex items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
