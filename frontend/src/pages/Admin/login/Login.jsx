@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../../../slice/Admin/login';
-import Navbar from '../../../components/User/Navbar';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import loginPic from '../../../../public/assets/login.svg';
@@ -60,7 +59,7 @@ const Login = () => {
                 <div className="flex bg-white rounded-lg shadow-2xl overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
                     <div className="hidden lg:block lg:w-1/2 bg-cover" style={{backgroundImage: `url(${loginPic})`}}></div>
                     <div className="w-full p-8 lg:w-1/2">
-                        <p className="text-xl text-gray-600 text-center">Welcome back!</p>
+                        <p className="text-xl text-gray-900 text-center">Welcome back!</p>
                         <a href="#" className="flex items-center justify-center mt-4 text-white rounded-lg shadow-md hover:bg-gray-100">
                             <div className="px-4 py-3">
                             <svg className="h-6 w-6" viewBox="0 0 40 40">
