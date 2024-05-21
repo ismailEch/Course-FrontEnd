@@ -12,8 +12,8 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
 
     return (
         <div className={`md:flex md:flex-col bg-gray-800 ${isSidebarOpen ? 'w-full' : 'w-64 hidden md:block'}`}>
-            <div className="flex items-center justify-between h-16 bg-gray-900">
-                <span className="text-white font-bold m-auto uppercase">Dashboard</span>
+            <div className="flex items-center justify-between h-16 bg-primary">
+                <span className="text-white font-bold m-auto uppercase">ACADEMIA</span>
                 <button onClick={toggleSidebar} className="text-gray-300 focus:outline-none md:hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">

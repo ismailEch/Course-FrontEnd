@@ -49,8 +49,8 @@ const Nav = ({ toggleSidebar }) => {
                     onChange={handleInputChange}
                 />
                 <div className="relative">
-                    <button onClick={toggleDropdown} className="flex items-center text-gray-500 hover:text-gray-900 focus:outline-none focus:text-gray-700">
-                        <FaUserAlt className="h-6 w-6" />
+                    <button onClick={toggleDropdown} className="flex items-center text-white hover:text-gray-400 focus:outline-none focus:text-secondary">
+                        <FaUserAlt className="h-6  w-6" />
                     </button>
                     {showDropdown && (
                         <div className="absolute right-0 top-10 w-40 bg-white border border-gray-200 rounded-md shadow-lg">
