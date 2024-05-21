@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import './Stylee.css'
 
 function AdminNavbar() {
@@ -21,4 +21,4 @@ function AdminNavbar() {
     )
 }
 
-export default AdminNavbar
+export default AdminNavbar;
