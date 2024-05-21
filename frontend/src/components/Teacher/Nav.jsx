@@ -1,6 +1,4 @@
-// Nav.js
 import React, { useState } from 'react';
-import PersonIcon from '../../../public/assets/Person.svg';
 import { useNavigate } from 'react-router-dom';
 import ProfileModal from './ProfileModal';
 import { FaUserAlt } from "react-icons/fa";
@@ -13,7 +11,6 @@ const Nav = ({ toggleSidebar }) => {
 
     const handleLogout = () => {
         localStorage.removeItem('token_teacher');
-        // localStorage.removeItem('id_teacher');
         navigate('/teacher/login');
     };
 
@@ -34,14 +31,16 @@ const Nav = ({ toggleSidebar }) => {
     };
 
     return (
-        <div className="flex items-center justify-between p-4 bg-white border-b border-gray-200">
-            <div className="flex items-center px-4">
+        <div className="flex items-center justify-between p-4 bg-primary border-b border-gray-200">
+            <div className="flex items-center">
                 <button onClick={toggleSidebar} className="text-gray-500 focus:outline-none focus:text-gray-700 md:hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
+                <span className="ml-4 text-white font-bold">MY DASHBOARD</span>
+            </div>
+            <div className="flex items-center">
                 <input 
                     className="mx-4 w-72 sm:w-96 border rounded-md px-4 py-2" 
                     type="text" 
@@ -49,22 +48,22 @@ const Nav = ({ toggleSidebar }) => {
                     value={searchText}
                     onChange={handleInputChange}
                 />
+                <div className="relative">
+                    <button onClick={toggleDropdown} className="flex items-center text-gray-500 hover:text-gray-900 focus:outline-none focus:text-gray-700">
+                        <FaUserAlt className="h-6 w-6" />
+                    </button>
+                    {showDropdown && (
+                        <div className="absolute right-0 top-10 w-40 bg-white border border-gray-200 rounded-md shadow-lg">
+                            <div onClick={handleProfileClick} className="px-4 py-2 cursor-pointer">PROFILE</div>
+                            <hr className="border-gray-200" />
+                            <button onClick={handleLogout} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                LOGOUT
+                            </button>
+                        </div>
+                    )}
+                </div>
+                {showModal && <ProfileModal onClose={handleCloseModal} />}
             </div>
-            <div className="relative">
-                <button onClick={toggleDropdown} className="flex items-center mr-10 text-gray-500 hover:text-gray-900 focus:outline-none focus:text-gray-700">
-                    <FaUserAlt  className="h-6 w-6" />
-                </button>
-                {showDropdown && (
-                    <div className="absolute right-0 top-10 w-40 bg-white border border-gray-200 rounded-md shadow-lg">
-                        <div onClick={handleProfileClick} className="px-4 py-2 cursor-pointer">Profile</div>
-                        <hr className="border-gray-200" />
-                        <button onClick={handleLogout} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                            Logout
-                        </button>
-                    </div>
-                )}
-            </div>
-            {showModal && <ProfileModal onClose={handleCloseModal} />}
         </div>
     );
 };

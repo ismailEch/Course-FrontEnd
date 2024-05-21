@@ -14,7 +14,26 @@ export default {
         "light-gray": "#C2BEBE",
         "rich-purple": "#524870",
         "red": "#FF5156",
-        "deep-red": "#A20308"
+        "deep-red": "#A20308",
+        "Vibrant-Purple": "#AF5CD1"
+      },
+      gray: {
+        100: '#f7fafc',
+        200: '#edf2f7',
+        500: '#a0aec0',
+        700: '#4a5568',
+      },
+      teal: {
+        100: '#e6fffa',
+        500: '#38b2ac',
+      },
+      purple: {
+        100: '#faf5ff',
+        500: '#9f7aea',
+      },
+      blue: {
+        100: '#ebf8ff',
+        500: '#4299e1',
       }
     },
   },

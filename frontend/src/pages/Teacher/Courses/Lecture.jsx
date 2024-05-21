@@ -20,4 +20,4 @@ return (
 )
 }
 
-export default Lecture
+export default Lecture;

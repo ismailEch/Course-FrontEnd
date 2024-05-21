@@ -13,7 +13,7 @@ function Create() {
 return (
     <div className="flex h-screen bg-gray-100">
         <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-        <div className="flex flex-col flex-1 overflow-y-auto">
+        <div className="flex flex-col flex-1 overflow-y-auto bg-primary">
             <Nav toggleSidebar={toggleSidebar} />
             <Content />
         </div>
@@ -21,4 +21,4 @@ return (
 )
 }
 
-export default Create
+export default Create;
