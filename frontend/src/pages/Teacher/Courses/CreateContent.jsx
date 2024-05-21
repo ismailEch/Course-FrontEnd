@@ -67,8 +67,8 @@ function CreateContent() {
     };
 
     return (
-        <div className="mx-14 mt-10 border-2 border-blue-400 rounded-lg">
-            <div className="mt-10 text-center font-bold">Create Course</div>
+        <div className="mx-14 mt-10  border-2  bg-white rounded-lg ">
+            <div className="mt-10 text-center  text-secondary text-[26px] font-bold">CREATE COURSE</div>
             <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className="p-8">
                     <div className="flex gap-4 mb-4">
@@ -77,16 +77,16 @@ function CreateContent() {
                             name="title"
                             value={courseDetails.title}
                             onChange={handleInputChange}
-                            className="mt-1 block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                            className="mt-1 block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-secondary shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-secondary focus:outline-none focus:ring-1 focus:ring-secondary sm:text-sm"
                             placeholder="Course Title *"
                         />
                         <select
                             name="language"
                             value={courseDetails.language}
                             onChange={handleInputChange}
-                            className="block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 font-semibold text-gray-500 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                            className="block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 font-semibold text-gray-500 shadow-sm focus:border-secondary focus:outline-none focus:ring-1 focus:ring-secondary sm:text-sm"
                         >
-                            <option disabled selected>Select Language</option>
+                            <option value="" disabled>Select Language</option>
                             <option value="english">English</option>
                             <option value="spanish">Spanish</option>
                             <option value="chinese">Chinese</option>
@@ -102,9 +102,9 @@ function CreateContent() {
                             name="level"
                             value={courseDetails.level}
                             onChange={handleInputChange}
-                            className="block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 font-semibold text-gray-500 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                            className="block w-1/2 rounded-md border  bg-white px-3 py-4 font-semibold text-gray-500 shadow-sm focus:border-secondary focus:outline-none focus:ring-1 focus:ring-secondary sm:text-sm"
                         >
-                            <option disabled selected>Select Level</option>
+                            <option  value="" disabled>Select Level</option>
                             <option value="Beginner">Beginner</option>
                             <option value="Intermediate">Intermediate</option>
                             <option value="Advanced">Advanced</option>
@@ -114,9 +114,9 @@ function CreateContent() {
                             name="Category"
                             value={courseDetails.Category}
                             onChange={handleInputChange}
-                            className="block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 font-semibold text-gray-500 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                            className="block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 font-semibold text-gray-500 shadow-sm focus:border-secondary focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
                         >
-                            <option disabled selected>Select Category</option>
+                            <option value="" disabled>Select Category</option>   
                             <option value="information_security">Information Security</option>
                             <option value="graphic_design">Graphic Design</option>
                             <option value="programming">Programming</option>
@@ -130,14 +130,14 @@ function CreateContent() {
                             name="price"
                             value={courseDetails.price}
                             onChange={handleInputChange}
-                            className="mt-1 block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                            className="mt-1 block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-secondary focus:outline-none focus:ring-1 focus:ring-secondary sm:text-sm"
                             placeholder="Price *"
                         />
                         <input
                             type="file"
                             name="cover"
                             onChange={handleFileChange}
-                            className="mt-1 block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-slate-400 shadow-sm font-semibold text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                            className="mt-1 block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-slate-400 shadow-sm font-semibold text-gray-500 focus:border-secondary focus:outline-none focus:ring-1 focus:ring-secondary sm:text-sm"
                             placeholder="Cover *"
                         />
                     </div>
@@ -154,10 +154,7 @@ function CreateContent() {
                         <button
                             type="submit"
                             style={{ backgroundColor: "#9563FF" }}
-                            className="cursor-pointer rounded-lg  px-8 py-5 text-sm font-semibold text-white"
-                        >
-                            Next
-                        </button>
+                            className="cursor-pointer rounded-lg  px-8 py-5 text-sm font-semibold text-white"> Next</button>
                     </div>
                 </div>
             </form>

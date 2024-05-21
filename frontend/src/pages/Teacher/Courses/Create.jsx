@@ -11,9 +11,9 @@ function Create() {
         setIsSidebarOpen(!isSidebarOpen);
     };
 return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen  bg-primary">
         <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-        <div className="flex flex-col flex-1 overflow-y-auto">
+        <div className="flex flex-col flex-1 overflow-y-auto bg-white">
             <Nav toggleSidebar={toggleSidebar} />
             <Content />
         </div>
@@ -21,4 +21,4 @@ return (
 )
 }
 
-export default Create
+export default Create;
