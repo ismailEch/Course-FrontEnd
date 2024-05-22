@@ -67,7 +67,7 @@ const Register = () => {
 
   return (
     <div className=''>
-      <div className="py-14   mb-[-42px]">
+      <div className="py-16   mb-[-42px]">
         <div className="flex bg-white rounded-lg shadow-2xl overflow-hidden mx-auto max-w-sm lg:max-w-4xl lg:max-h-[700px]">
           <div className="w-full p-8 lg:w-1/2">
             <h2 className="text-2xl text-gray-900 text-center">Register Yourself!</h2>

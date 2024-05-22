@@ -61,8 +61,9 @@ function CreateContent() {
             localStorage.setItem('courseID', response.data.Course._id);
             navigate("/teacher/Section/create");
             console.log('Response from server:', response.data.Course._id);
-        } catch (error) {
-            console.error('Error creating course:', error);
+        } catch (error) 
+        {
+            console.error('Error creating course:', error)
         }
     };
 
