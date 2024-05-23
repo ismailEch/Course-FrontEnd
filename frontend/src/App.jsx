@@ -40,6 +40,7 @@ import PaymentTeacherDone from './pages/Teacher/Payment/paymentSuccess'
 import Profile from './pages/User/Profile/Profile';
 import About from './pages/User/About/About';
 import AllUserCourses from './pages/User/Courses/AllCourses';
+
 import CategoryCourses from './components/User/CategoryCourses';
 //register and login option
 import GetStrated from './pages/All/GetStrated';

@@ -18,7 +18,6 @@ function CreateContent() {
     } else {
         console.error('Token not found in localStorage');
     }
-    // const instructorId = localStorage.getItem('id_teacher') || '';
 
     const [courseDetails, setCourseDetails] = useState({
         title: '',
