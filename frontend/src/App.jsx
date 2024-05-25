@@ -40,6 +40,7 @@ import PaymentTeacherDone from './pages/Teacher/Payment/paymentSuccess'
 import Profile from './pages/User/Profile/Profile';
 import About from './pages/User/About/About';
 import AllUserCourses from './pages/User/Courses/AllCourses';
+import OneCourse from './pages/User/Courses/OneCourse';
 
 import CategoryCourses from './components/User/CategoryCourses';
 //register and login option
@@ -60,6 +61,8 @@ const App = () => {
         {/* //user routes */}
         <Route path="/about" element={<About />} />
         <Route path="/courses" element={<AllUserCourses />} />
+        <Route path="/course/details/:courseId" element={<OneCourse />} />
+
         <Route path="/profile" element={<Profile />} />
         {/* <Route path="/category:categoryName" element={<CategoryCourses />} /> */}
         <Route path="/category/:categoryName" element={<CategoryCourses />} />
