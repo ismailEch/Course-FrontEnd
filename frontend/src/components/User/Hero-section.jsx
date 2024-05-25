@@ -2,7 +2,7 @@
 import hero from "../../assets/hero.svg";
 const HeroSection = () => {
   return (
-    <div className="flex justify-center items-center bg-primary text-white py-20">
+    <div className="flex justify-center mt-8 items-center bg-primary text-white py-20">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex flex-row items-center">
             <div className="lg:w-1/2 lg:pr-16 mb-8 lg:mb-0">
