@@ -6,6 +6,8 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { jwtDecode } from 'jwt-decode';
+import { loadStripe } from '@stripe/stripe-js'; 
 
 const styles = {
     container: {
@@ -78,17 +80,19 @@ const styles = {
     },
 };
 
+const stripePromise = loadStripe('pk_test_51P1ph7P9K7LqRIa1Zk1DSapusTBKcWrK5bHBiAICGNyoTEW8xB2zDQoXpVQ7wKK5iY9edQetDwaTd24gaYE1nR0800pVKXp6oQ');
+
 function OneCourse() {
     const { courseId } = useParams();
     const [course, setCourse] = useState(null);
     const [sections, setSections] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [sessionId, setSessionId] = useState(null); 
 
     useEffect(() => {
         axios.get(`http://localhost:3000/api/course/detail/${courseId}`)
             .then(response => {
-                console.log(response)
                 const { sections, lectures } = response.data;
                 if (sections.length > 0) {
                     setCourse(sections[0].course);
@@ -114,23 +118,56 @@ function OneCourse() {
             });
     }, [courseId]);
 
-    // if (loading) return <div>Loading...</div>;
-    // if (error) return <div>Error: {error}</div>;
+    const handleBuyNow = async () => {
+        try {
+            const token = localStorage.getItem('token'); 
+            if (!token) throw new Error('No token found');
+    
+            const decoded = jwtDecode(token);
+            const userId = decoded.id; 
+    
+            const response = await axios.post('http://localhost:3000/api/payment/create-checkout-session', {
+                courseId,
+                userId
+            });
+
+            // Set sessionId in component state
+            setSessionId(response.data.id);
+    
+            const stripe = await stripePromise;
+            const { error } = await stripe.redirectToCheckout({
+                sessionId: response.data.id,
+            });
+            if (error) {
+                console.error('Error redirecting to checkout:', error);
+            }
+        } catch (error) {
+            console.error('Error creating checkout session:', error);
+        }
+    };
 
     return (
         <div style={styles.container}>
             {course && (
                 <div className="course-info" style={styles.courseInfo}>
                     <div style={styles.courseDetails}>
-                        <div>
+                        <div className='space-y-8'>
                             <h1 style={styles.courseTitle}>{course.title}</h1>
-                            {/* <p style={styles.courseSubtitle}>Master Python by building 100 projects in 100 days. Learn data science, automation, build websites, games and apps!</p> */}
                             <div style={styles.courseDetail}>
-                                <span style={{ backgroundColor: '#ffe599', padding: '5px 10px', borderRadius: '5px', marginRight: '10px' }}>Bestseller</span>
-                                <span>4.7 <span style={{ color: '#f39c12' }}>★★★★★</span> (297,654 ratings) 1,280,941 students</span>
+                                <span style={{ backgroundColor: '#ffe599', padding: '5px 10px', borderRadius: '5px', marginRight: '10px' }}>{course.Category}</span>
+                                <span>4.7 <span style={{ color: '#f39c12' }}>★★★★★</span></span>
                             </div>
-                            <p style={styles.courseDetail}><strong>Created by </strong><a href="#">Dr. Angela Yu</a></p>
-                            <p style={styles.courseDetail}><strong>Last updated </strong>5/2024</p>
+                            <p style={styles.courseDetail}><strong>Created by </strong><a href="#"> {course.instructor.FirstName} {course.instructor.LastName} </a></p>
+                            <p style={styles.courseDetail}>
+                                <strong>Created At: </strong>
+                                {(() => {
+                                    const date = new Date(course.createdAt);
+                                    const year = date.getFullYear();
+                                    const month = String(date.getMonth() + 1).padStart(2, '0');
+                                    const day = String(date.getDate()).padStart(2, '0');
+                                    return `${year}-${month}-${day}`;
+                                })()}
+                            </p>
                             <p style={styles.courseDetail}><strong>Language: </strong>{course.language}</p>
                             <p style={styles.courseDetail}><strong>Level: </strong>{course.level}</p>
                         </div>
@@ -139,7 +176,7 @@ function OneCourse() {
                         <img src={course.cover} alt={course.title} style={styles.courseImage} />
                         <div style={styles.price}>${course.price}</div>
                         <button style={styles.addButton}>Add to cart</button>
-                        <button style={{ ...styles.addButton, backgroundColor: '#4CAF50', marginTop: '10px' }}>Buy now</button>
+                        <button style={{ ...styles.addButton, backgroundColor: '#4CAF50', marginTop: '10px' }}  onClick={() => handleBuyNow(sessionId, courseId)}>Buy now</button>
                     </div>
                 </div>
             )}
