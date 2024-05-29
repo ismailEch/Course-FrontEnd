@@ -8,12 +8,14 @@ const CallToActionSection = () => {
         <p className="text-lg leading-relaxed mb-8">
           Discover new possibilities for the future. Learn from just $13.99 USD until tomorrow.
         </p>
+        
         <div>
           <button className="mx-2 px-4 py-2 bg-deep-red hover:bg-pink rounded">Join as Instructor</button>
           <button className="mx-2 px-4 py-2 bg-secondary hover:bg-purple-300 rounded">Join as Student</button>
         </div>
       </div>
     </section>
+    
   );
 }
 

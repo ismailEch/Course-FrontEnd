@@ -69,7 +69,6 @@ const Navbar = () => {
     { link: "Home", path: "/" },
     { link: "About", path: "/about" },
     { link: "Courses", path: "/courses" },
-    { link: "Blog", path: "/blog" },
     { link: "Contact", path: "/contact" },
   ];
 
@@ -112,12 +111,12 @@ const Navbar = () => {
 
 
       {token ? (
-        <div className="flex items-center space-x-2 mr-12"> {/* Logged in */}
+        <div className="flex items-center space-x-2 mr-12"> 
           <BiSolidUserCircle className='w-10 h-10 text-secondary cursor-pointer' />
-          <SlBasket className="w-6 h-6 text-white cursor-pointer" /> {/* Cart icon */}
+          <SlBasket className="w-6 h-6 text-white cursor-pointer" /> 
         </div>
       ) : (
-        <div className="flex items-center space-x-2 mr-12"> {/* Not logged in */}
+        <div className="flex items-center space-x-2 mr-12"> 
           <Link to={'/register/option'} className="hidden md:block px-3 py-2 rounded-md text-white bg-secondary hover:bg-purple-400">Get Started</Link>
           <Link to={'/login/option'} className="hidden md:block px-3 py-2 rounded-md text-white bg-secondary hover:bg-purple-400">Login</Link>
         </div>
