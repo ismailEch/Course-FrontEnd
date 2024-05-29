@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+// import jwtDecode from 'jwt-decode';
 import { jwtDecode } from 'jwt-decode';
 
 function CreateContent() {
@@ -18,7 +19,6 @@ function CreateContent() {
     } else {
         console.error('Token not found in localStorage');
     }
-    // const instructorId = localStorage.getItem('id_teacher') || '';
 
     const [courseDetails, setCourseDetails] = useState({
         title: '',
@@ -29,6 +29,26 @@ function CreateContent() {
         cover: null,
         Category: ''
     });
+
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        // Fetch categories from the API
+        const fetchCategories = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/api/category');
+                if (response.data.status === 'success') {
+                    setCategories(response.data.categories);
+                } else {
+                    console.error("Unexpected response format:", response.data);
+                }
+            } catch (error) {
+                console.error("Error fetching categories: ", error);
+            }
+        };
+
+        fetchCategories();
+    }, []);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -68,8 +88,8 @@ function CreateContent() {
     };
 
     return (
-        <div className="mx-14 mt-10  border-2  bg-white rounded-lg ">
-            <div className="mt-10 text-center  text-secondary text-[26px] font-bold">CREATE COURSE</div>
+        <div className="mx-14 mt-10 border-2 bg-white rounded-lg ">
+            <div className="mt-10 text-center text-secondary text-[26px] font-bold">CREATE COURSE</div>
             <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className="p-8">
                     <div className="flex gap-4 mb-4">
@@ -103,9 +123,9 @@ function CreateContent() {
                             name="level"
                             value={courseDetails.level}
                             onChange={handleInputChange}
-                            className="block w-1/2 rounded-md border  bg-white px-3 py-4 font-semibold text-gray-500 shadow-sm focus:border-secondary focus:outline-none focus:ring-1 focus:ring-secondary sm:text-sm"
+                            className="block w-1/2 rounded-md border bg-white px-3 py-4 font-semibold text-gray-500 shadow-sm focus:border-secondary focus:outline-none focus:ring-1 focus:ring-secondary sm:text-sm"
                         >
-                            <option  value="" disabled>Select Level</option>
+                            <option value="" disabled>Select Level</option>
                             <option value="Beginner">Beginner</option>
                             <option value="Intermediate">Intermediate</option>
                             <option value="Advanced">Advanced</option>
@@ -117,12 +137,10 @@ function CreateContent() {
                             onChange={handleInputChange}
                             className="block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 font-semibold text-gray-500 shadow-sm focus:border-secondary focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
                         >
-                            <option value="" disabled>Select Category</option>   
-                            <option value="information_security">Information Security</option>
-                            <option value="graphic_design">Graphic Design</option>
-                            <option value="programming">Programming</option>
-                            <option value="marketing">Marketing</option>
-                            <option value="languages">Languages</option>
+                            <option value="" disabled>Select Category</option>
+                            {categories.map(category => (
+                                <option key={category._id} value={category.name.toLowerCase()}>{category.name}</option>
+                            ))}
                         </select>
                     </div>
                     <div className="my-6 flex gap-4">
@@ -155,7 +173,10 @@ function CreateContent() {
                         <button
                             type="submit"
                             style={{ backgroundColor: "#9563FF" }}
-                            className="cursor-pointer rounded-lg  px-8 py-5 text-sm font-semibold text-white"> Next</button>
+                            className="cursor-pointer rounded-lg px-8 py-5 text-sm font-semibold text-white"
+                        > 
+                            Next
+                        </button>
                     </div>
                 </div>
             </form>

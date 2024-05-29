@@ -55,10 +55,10 @@ const EnrollPage = () => {
                     ) : (
                       <p className="text-sm text-gray-700">Unknown Instructor</p>
                     )}
-                            </div>
+                </div>
                 <div className="flex items-center mb-2"></div>
                 <p className="text-gray-700 mb-2">{course.description.substring(0, 65)}...</p>
-                <p className="text-gray-700">{course.hours} Hours</p>
+                <p className="text-gray-700">{course.level} Hours</p>
               </div>
             </div>
           ))}

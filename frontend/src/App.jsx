@@ -10,6 +10,7 @@ import Users from './pages/Admin/Users/Users';
 import Teachers from './pages/Admin/Teachers/Teachers';
 import Plan from './pages/Admin/Plan/Plan';
 import Categories from './pages/Admin/Categories/Categories';
+import AllCourses from './pages/Admin/Courses/Courses'
 import Test from './pages/Admin/test/Test';
 
 //teachers part
@@ -36,7 +37,11 @@ import PaymentTeacherDone from './pages/Teacher/Payment/paymentSuccess'
 
 
 //users pages
+import Profile from './pages/User/Profile/Profile';
 import About from './pages/User/About/About';
+import AllUserCourses from './pages/User/Courses/AllCourses';
+import OneCourse from './pages/User/Courses/OneCourse';
+
 import CategoryCourses from './components/User/CategoryCourses';
 //register and login option
 import GetStrated from './pages/All/GetStrated';
@@ -55,6 +60,10 @@ const App = () => {
         <Route path="/login/option" element={<OptionLogin />} />
         {/* //user routes */}
         <Route path="/about" element={<About />} />
+        <Route path="/courses" element={<AllUserCourses />} />
+        <Route path="/course/details/:courseId" element={<OneCourse />} />
+
+        <Route path="/profile" element={<Profile />} />
         {/* <Route path="/category:categoryName" element={<CategoryCourses />} /> */}
         <Route path="/category/:categoryName" element={<CategoryCourses />} />
         
@@ -64,6 +73,7 @@ const App = () => {
         <Route path="/admin/teachers" element={<Teachers />} />
         <Route path="/admin/plans" element={<Plan />} />
         <Route path="/admin/categories" element={<Categories />} />
+        <Route path="/admin/courses" element={<AllCourses />} />
 
        {/* teachers routes */}
         <Route path="/teacher/register" element={<RegisterTeacher />} />

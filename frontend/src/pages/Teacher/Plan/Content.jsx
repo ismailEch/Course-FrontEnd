@@ -37,7 +37,7 @@ const handleDeletePlan = () => {
         axios.delete(`http://localhost:3000/api/subscription/teacher/plan/${subscription._id}`)
             .then(response => {
                 localStorage.removeItem('token');
-                navigate('/teacher/dashboard')
+                navigate('/teacher/login')
             })
             .catch(error => {
                 console.error('Error deleting plan:', error);

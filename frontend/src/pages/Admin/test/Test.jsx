@@ -1,33 +1,26 @@
 import React from 'react';
 import { FaUserGraduate } from "react-icons/fa6";
 import logo from '../../../assets/Logo (2).svg';
+import { Link } from 'react-router-dom';
 
 const Test = () => {
   return (
-    <div className="relative min-h-screen bg-primary to-gray-900 flex flex-col items-center justify-center">
-      {/* Logo at the top left corner */}
-      <img src={logo} alt="Logo" className="absolute top-4 left-4 w-30 h-30" />
-
-      <h1 className="text-white text-3xl font-bold mb-8">Join as a client or freelancer</h1>
-      <div className="flex space-x-8">
-        <div className="relative bg-[#524870] text-white p-6 rounded-lg shadow-lg w-60 h-60 hover:bg-primary-700 hover:opacity-80 hover:shadow-2xl hover:cursor-pointer transition duration-300 ease-in-out">
-          <div className="absolute top-2 left-2 bg-white text-[#524870] p-2 rounded-full">
-            <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 3a3 3 0 100 6 3 3 0 000-6zM6 9a4 4 0 100 8h8a4 4 0 100-8H6z" />
-            </svg>
-          </div>
-          <p className="text-lg mt-20 text-center">I'm a student, seeking courses to study</p>
-        </div>
-        <div className="relative bg-[#524870] text-white p-6 rounded-lg shadow-lg w-60 h-60 hover:bg-primary-700 hover:opacity-80 hover:shadow-2xl hover:cursor-pointer transition duration-300 ease-in-out">
-          <div className="absolute top-2 left-2 bg-white text-[#524870] p-2 rounded-full">
-            <FaUserGraduate className="w-10 h-10" />
-          </div>
-          <p className="text-lg mt-20 text-center">I'm a freelancer, looking for work</p>
-        </div>
-      </div>
-      <button className="mt-8 bg-white text-purple-800 py-2 px-6 rounded-3xl shadow-lg">Apply as a freelancer</button>
-      <p className="text-white mt-4">Already have an account? <a href="#" className="underline text-pink">Log In</a></p>
+    <div class="h-screen w-screen bg-gray-50 flex items-center">
+    <div class="container flex flex-col md:flex-row items-center justify-between px-5 text-gray-700">
+            <div class="w-full lg:w-1/2 mx-8">
+                <div class="text-7xl text-green-500 font-dark font-extrabold mb-8"> 404</div>
+            <p class="text-2xl md:text-3xl font-light leading-normal mb-8">
+                Sorry we couldn't find the page you're looking for
+            </p>
+            
+            <Link to={"/"} class="px-5 inline py-3 text-sm font-medium leading-5 shadow-2xl text-white transition-all duration-400 border border-transparent rounded-lg focus:outline-none bg-green-600 active:bg-red-600 hover:bg-red-700">back to homepage</Link>
     </div>
+        <div class="w-full lg:flex lg:justify-end lg:w-1/2 mx-5 my-12">
+        <img src="https://user-images.githubusercontent.com/43953425/166269493-acd08ccb-4df3-4474-95c7-ad1034d3c070.svg" class="" alt="Page not found" />
+        </div>
+    
+    </div>
+</div>
   );
 }
 
