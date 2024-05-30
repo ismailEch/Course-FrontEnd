@@ -74,7 +74,7 @@ const Navbar = () => {
     { link: "Home", path: "/" },
     { link: "About", path: "/about" },
     { link: "Courses", path: "/courses" },
-    { link: "Blog", path: "/blog" },
+    // { link: "Blog", path: "/blog" },
     { link: "Contact", path: "/contact" },
   ];
 
@@ -126,7 +126,7 @@ const Navbar = () => {
   }, [showMenu]);
 
   return (
-    <nav className="flex sm:w-full items-center justify-between py-2 bg-primary shadow-md fixed top-0 w-full z-50 backdrop-blur-sm bg-opacity-70">
+    <nav className="flex sm:w-full items-center justify-between py-2 mb-8 bg-primary shadow-md fixed top-0 w-full z-50 backdrop-blur-sm bg-opacity-70">
       <div className="flex items-center">
         <a href="/" className="text-xl font-bold text-white flex items-center pr-5">
           <img src={logo} alt="" className="w-auto h-20" />

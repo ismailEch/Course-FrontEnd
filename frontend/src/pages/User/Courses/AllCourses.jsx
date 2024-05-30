@@ -11,6 +11,7 @@ import profil5 from '../../../assets/profil5.svg';
 import profil6 from '../../../assets/profil6.svg';
 import profil7 from '../../../assets/profil7.svg';
 import { Link } from 'react-router-dom';
+import HeroSection from '../../../components/User/Hero-section';
 
 const profileImages = [profil1, profil2, profil3, profil4, profil5, profil6, profil7, profil8];
 
@@ -88,8 +89,9 @@ const AllCourses = () => {
     return (
         <div>
             <Navbar />
-            <div className="bg-primary text-primary py-20 mt-8">
-                <div className="max-w-7xl mx-auto px-4 w-11/12">
+            <HeroSection />
+            <div className="bg-primary text-primary py-20 ">
+                <div className="max-w-7xl mx-auto px-4 mt-8 w-11/12">
                     <div className="flex gap-2 mb-6">
                         <input
                             type="text"

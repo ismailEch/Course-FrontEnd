@@ -99,7 +99,7 @@ function LectureCreate() {
             navigate("/teacher/courses/create");
 
             // Log message to console
-            console.log('akhona');
+            console.log('akkskskhona');
         } catch (error) {
             console.error('Error creating lectures:', error);
         }

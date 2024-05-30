@@ -41,11 +41,16 @@ import Profile from './pages/User/Profile/Profile';
 import About from './pages/User/About/About';
 import AllUserCourses from './pages/User/Courses/AllCourses';
 import OneCourse from './pages/User/Courses/OneCourse';
-
+import ContactUs from './components/User/Contact';
 import CategoryCourses from './components/User/CategoryCourses';
 //register and login option
 import GetStrated from './pages/All/GetStrated';
 import OptionLogin from './pages/All/OptionLogin';
+
+
+
+
+import Success from './pages/User/Courses/Success';
 
 
 const App = () => {
@@ -60,6 +65,7 @@ const App = () => {
         <Route path="/login/option" element={<OptionLogin />} />
         {/* //user routes */}
         <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<ContactUs />} />
         <Route path="/courses" element={<AllUserCourses />} />
         <Route path="/course/details/:courseId" element={<OneCourse />} />
 
@@ -100,6 +106,7 @@ const App = () => {
 
 
 
+        <Route path='/success' element={<Success />} />
         <Route path='*' element={<Test />} />
         <Route path='/test' element={<Test />} />
 

@@ -130,9 +130,9 @@ function OneCourse() {
                 courseId,
                 userId
             });
-
-            // Set sessionId in component state
-            setSessionId(response.data.id);
+    
+            // Call the updatePurchasedCourses function immediately
+            await updatePurchasedCourses(userId, courseId);
     
             const stripe = await stripePromise;
             const { error } = await stripe.redirectToCheckout({
@@ -145,6 +145,22 @@ function OneCourse() {
             console.error('Error creating checkout session:', error);
         }
     };
+    
+    const updatePurchasedCourses = async (userId, courseId) => {
+        try {
+            await axios.put('http://localhost:3000/api/payment/update-purchased-courses', {
+                userId,
+                courseId
+            });
+            console.log('Course successfully added to purchased courses');
+        } catch (error) {
+            console.error('Error updating purchased courses:', error);
+        }
+    };
+    
+
+    
+    
 
     return (
         <div style={styles.container}>

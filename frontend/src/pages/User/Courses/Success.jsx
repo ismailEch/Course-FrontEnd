@@ -1,30 +1,39 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-function Success() {
+const Success = () => {
     const location = useLocation();
-    const query = new URLSearchParams(location.search);
-    const sessionId = query.get('session_id');
-    const userId = query.get('user_id');
-    const courseId = query.get('course_id');
+    const params = new URLSearchParams(location.search);
+    const sessionId = params.get('session_id');
+    const userId = params.get('user_id');
+    const courseId = params.get('course_id');
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/api/payment/success?session_id=${sessionId}&user_id=${userId}&course_id=${courseId}`)
-            .then(response => {
-                console.log('Payment success response:', response.data);
-            })
-            .catch(error => {
-                console.error('Error processing payment success:', error);
-            });
+        if (sessionId && userId && courseId) {
+            updatePurchasedCourses(sessionId, userId, courseId);
+        }
     }, [sessionId, userId, courseId]);
 
     return (
         <div>
-            <h1>Payment Successful</h1>
+            <h1>Payment Successful!</h1>
             <p>Your course has been added to your account.</p>
         </div>
     );
-}
+};
+
+const updatePurchasedCourses = async (sessionId, userId, courseId) => {
+    try {
+        await axios.put('http://localhost:3000/api/payment/update-purchased-courses', {
+            userId,
+            courseId,
+            sessionId
+        });
+        console.log('Course successfully added to purchased courses');
+    } catch (error) {
+        console.error('Error updating purchased courses:', error);
+    }
+};
 
 export default Success;
