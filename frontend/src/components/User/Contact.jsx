@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-// import contact from '../assets/contact5.png';
+
 import contact from '../../assets/contact5.png'
 import Navbar from './Navbar';
 import Footer from './Footer';
+
 
 function ContactUs() {
   const [communicationMethod, setCommunicationMethod] = useState('');
@@ -32,6 +33,7 @@ function ContactUs() {
   };
 
   return (
+
     <div>
         <Navbar className="mb-4" />
         <section className="py-24 bg-primary">

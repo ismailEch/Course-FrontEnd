@@ -22,10 +22,10 @@ const Register = () => {
     // Validation
     const errors = {};
     if (firstName.trim().length < 5) {
-      errors.firstName = 'First Name require';
+      errors.firstName = 'First Name requires at least 5 characters';
     }
     if (lastName.trim().length < 5) {
-      errors.lastName = 'Last Name require';
+      errors.lastName = 'Last Name requires at least 5 characters';
     }
     if (!email.trim()) {
       errors.email = 'Email is required';
@@ -52,22 +52,25 @@ const Register = () => {
         phone: phone,
       };
       try {
-        const response = await dispatch(registerUser(data));
+        const response = await dispatch(registerUser(data)).unwrap();
         console.log(response);
-        if (response.payload.status === 201) {
+        if (response.status === 201) {
           navigate('/user/login');
-        } else if (response.payload.message === 'Email already exists') {
-          toast.warning(response.payload.message);
+        } else if (response.message === 'Email already exists') {
+          toast.warning(response.message);
+        } else {
+          toast.error('An unexpected error occurred');
         }
       } catch (err) {
-        console.error(err);
+        console.error('Error:', err);
+        toast.error('Failed to register user. Please try again later.');
       }
     }
   };
 
   return (
     <div className=''>
-      <div className="py-14   mb-[-42px]">
+      <div className="py-16 mb-[-42px]">
         <div className="flex bg-white rounded-lg shadow-2xl overflow-hidden mx-auto max-w-sm lg:max-w-4xl lg:max-h-[700px]">
           <div className="w-full p-8 lg:w-1/2">
             <h2 className="text-2xl text-gray-900 text-center">Register Yourself!</h2>

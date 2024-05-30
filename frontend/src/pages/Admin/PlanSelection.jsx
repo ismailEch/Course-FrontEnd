@@ -22,6 +22,33 @@ const PlanSelection = () => {
         setSelectedPlan(planId);
     };
 
+    function plansMap () {
+        {plans.map(plan => (
+            <div key={plan._id} className="relative h-5/6 p-8 mb-4 border border-violet-400 rounded-2xl shadow-sm flex flex-col w-full md:h-auto md:w-auto" style={{ backgroundColor: '#181059' }}>
+                <div className="flex-1">
+                    <h3 className="text-2xl text-center font-semibold text-slate-50">{plan.name}</h3>
+                    <p className="mt-6 text-slate-50">You just want to discover</p>
+                    <ul role="list" className="mt-6 space-y-6">
+                        {plan.features.map((feature, index) => (
+                            <li key={index} className="flex">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 w-6 h-6 text-emerald-500" aria-hidden="true">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span className="ml-3 text-slate-50">{feature}</span>
+                            </li>
+                        ))}
+                    </ul>
+                    <p className="mt-4 flex items-baseline">
+                        <span className="text-3xl text-slate-50 font-extrabold tracking-tight">$ {plan.price}</span><span className="ml-1 text-xl text-slate-50 font-semibold">/month</span>
+                    </p>
+                </div>
+                <button style={{ backgroundColor: '#8645FF' }} className="text-white hover:bg-emerald-600 mt-8 block w-full md:w-1/2 py-3 px-6 border border-transparent rounded-md text-center font-medium" onClick={() => redirectToCheckout(plan._id)}>
+                    Select Plan
+                </button>
+            </div>
+        ))}
+    }
+
     const redirectToCheckout = async (planId) => {
         try {
             const token = localStorage.getItem('token_teacher');
@@ -38,7 +65,9 @@ const PlanSelection = () => {
             console.log(data)
 
             if (data.sessionId) {
-                window.location.href = `${data.sessionId}`;
+
+                window.location.href = `${data.sessionId}`; // Fix missing semicolon here
+
             }
             // } else {
             //     navigate('/teacher/dashboard');

@@ -25,7 +25,7 @@ import Lecture from './pages/Teacher/Courses/Lecture'
 //SINGLE COURSE 
 import CourseDetails from './pages/Teacher/Courses/SingleCourse'
 //plan and subscription part
-import TeacherPlan from './pages/Teacher/Plan/Plan'
+import TeacherPlan from './pages/Teacher/Plan/PlanSelection'
 
 
 
