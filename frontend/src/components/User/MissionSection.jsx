@@ -1,5 +1,5 @@
 // import React from 'react';
-import MissionImg from '../../assets/about1.png';
+import MissionImg from '../../assets/img 14.svg';
 import { motion } from 'framer-motion';
 
 const MissionSection = () => {
@@ -10,7 +10,7 @@ const MissionSection = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      <div className="container mx-auto flex flex-col md:flex-row items-center">
+      <div className="container mx-auto flex flex-col md:flex-row items-center w-11/12">
         <motion.div
           className="md:w-1/2 px-4 order-2 md:order-1 w-11/12"
           initial={{ x: -100, opacity: 0 }}
