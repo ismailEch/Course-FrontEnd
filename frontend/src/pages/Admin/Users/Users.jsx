@@ -1,5 +1,3 @@
-// Users.js
-
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
@@ -108,7 +106,7 @@ function Users() {
             <div className='content w-full p-6'>
                 <AdminNavbar className='content overflow-y-auto w-full p-6' />
                 <div className="mt-8 px-3 mb-6 flex justify-between items-center ">
-                    <h1 className="text-2xl font-semibold">Users</h1>
+                    <h1 className="text-2xl font-semibold" style={{ color: '#6C63FF' }}>Users</h1>
                     <div className="flex">
                         <input
                             type="text"
@@ -163,8 +161,7 @@ function Users() {
                         </div>
                     </div>
                 )}
-
-                {showConfirmationModal && (
+                                {showConfirmationModal && (
                     <RoleChangeConfirmationModal
                         user={selectedUser}
                         newRole={newRole}
@@ -185,3 +182,5 @@ function Users() {
 }
 
 export default Users;
+
+

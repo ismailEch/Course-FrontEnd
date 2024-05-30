@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginTeacher } from '../../../slice/Teacher/loginTeacher';
-import Navbar from '../../../components/User/Navbar';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import loginPic from '../../../../public/assets/login.svg';
@@ -18,7 +17,7 @@ const Login = () => {
         if (token) {
             navigate('/teacher/dashboard');
         }
-    }, []);
+    }, [navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -45,20 +44,24 @@ const Login = () => {
     
         try {
             const response = await dispatch(loginTeacher(data));
-            // console.log(response);
+            console.log('Response:', response); 
+
             if (response.payload && response.payload.message === 'Incorrect email or password') {
                 toast.error(response.payload.message);
             } else if (response.payload && response.payload.data.message === 'Seccuss') {
                 console.log('Login successful');
-                console.log(response.payload.data.teacher_id);
+                console.log('Response Data:', response.payload.data);
+                console.log('Teacher ID:', response.payload.data.teacher_id);
 
-                // Fetch all subscriptions
+                
                 const subscriptionsResponse = await fetch('http://localhost:3000/api/teacherPayment/all-subscriptions');
                 const subscriptionsData = await subscriptionsResponse.json();
-                // console.log(subscriptionsData);
+                console.log('Subscriptions Data:', subscriptionsData); 
 
-                //  Check if teacher_id exists in any subscriptions
+                
                 const isSubscribed = subscriptionsData.subscriptions.some(subscription => subscription.teacher === response.payload.data.teacher_id);
+                console.log('Is Subscribed:', isSubscribed); 
+
                 if (isSubscribed) {
                     navigate('/teacher/dashboard')
                 } else {
@@ -88,7 +91,7 @@ const Login = () => {
                             </svg>
                             </div>
                             <h1 className="px-4 py-3 w-5/6 text-center text-gray-600 font-bold">Sign in with Google</h1>
-                        </a>
+                            </a>
                         <div className="mt-4 flex items-center justify-between">
                             <span className="border-b w-1/5 lg:w-1/4"></span>
                             <a href="#" className="text-xs text-center text-gray-500 uppercase">or login with email</a>
@@ -137,8 +140,3 @@ const Login = () => {
 };
 
 export default Login;
-
-
-
-
-
